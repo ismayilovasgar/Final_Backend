@@ -36,6 +36,7 @@ class Trainer(models.Model):
     image = models.ImageField(
         upload_to="trainer/%Y/%m/%d/", default="profile_avatar.jpg"
     )
+    
 
     facebook = models.URLField(
         max_length=100, blank=True, null=True, default="https://www.facebook.com/"
