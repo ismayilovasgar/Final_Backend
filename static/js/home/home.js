@@ -64,36 +64,43 @@ select_sorting.forEach((item) => {
 const list_category = [...document.querySelectorAll("ul.list li")];
 list_category.map((item) => {
   item.addEventListener("click", (e) => {
-    //
-    // filterByCategory(`${item.textContent}`);
-    //
+    document
+      .querySelectorAll("#popup li")
+      .forEach((el) => el.classList.remove("selected"));
+    item.classList.toggle("selected");
+
     fetchFilteredData(`${item.textContent}`);
   });
 });
 
 // gpt
-
+const listWrap = document.querySelector(".trainersList  .listWrap");
 function fetchFilteredData(text) {
-  const data = { text: text, ke2: "value2" };
+  listWrap.innerHTML = "";
+
   fetch(`http://127.0.0.1:8000/trainer/${text}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "X-CSRFToken": getCookie("csrftoken"),
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(text),
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("receive data: ", data);
-      data.forEach((person) => {
-
-
-        const img=document.querySelector(".aboutPreview img.some-icon-dark")
-        img.src=`media/${person.image}`
-        console.log(`url: ${person.image}`);
-
-
+      console.log("receive data:", data);
+      data.map((trainer) => {
+        listWrap.innerHTML += `
+        <div class="trainerItem">
+            <div class="profile">
+              <img src="media/${trainer.image}" alt="">
+            </div>
+            <div class="trainerName">${trainer.first_name} ${trainer.last_name}</div>
+            <div class="trainerPosition">
+              ${trainer.category}      
+            </div>
+        </div>
+        `;
       });
     })
     .catch((error) => console.error("Error fetching data:", error));
@@ -114,33 +121,3 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-//
-// me
-function filterByCategory(text) {
-  let url = `http://127.0.0.1:8000/trainer/${text}`;
-  fetch(url)
-    .then((response) => {
-      // if (!response.ok) {
-      //   throw new Error("Network response was not ok");
-      // }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Data received:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
-}
-
-// Form
-// const catalogInput = document.getElementById("catalog_input");
-// const form = document.getElementById("catalog_search");
-
-// catalogInput.addEventListener("focus", function () {
-//   form.classList.add("active-border");
-// });
-
-// catalogInput.addEventListener("blur", function () {
-//   form.classList.remove("active-border");
-// });

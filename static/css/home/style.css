@@ -734,15 +734,15 @@
 }
 .trainers .trainersList .listWrap {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  min-height: 50vh; /* dont change appearenc in feth js */
   flex-wrap: wrap;
   column-gap: var(--trainer-col-gap);
   row-gap: var(--trainer-row-gap);
 }
 /*  */
-.select{
+.select {
   background-color: var(--Neutrals-8);
-
 }
 .select input,
 .select .select_arrow {
@@ -765,6 +765,10 @@
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
+}
+
+.select .list li:hover {
+  cursor: pointer;
 }
 
 .select .list li.selected {

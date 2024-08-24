@@ -11,14 +11,8 @@ def filter_by_categry(request, category):
 
     if request.method == "POST":
         try:
-            trainer = Trainer.objects.all().values()
+            trainer = Trainer.objects.filter(category=category).values()
             trainer_list = list(trainer)
-            data = json.loads(request.body)
-
-            response_data = {
-                "message": "Data receive Successfully",
-                "receive_data": data,
-            }
 
             return JsonResponse(trainer_list, safe=False)
         except:

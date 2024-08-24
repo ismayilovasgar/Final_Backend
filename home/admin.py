@@ -10,18 +10,18 @@ class TrainerAdmin(admin.ModelAdmin):
         model = Trainer
 
 
-@admin.register(Profession)
-class ProfessionAdmin(admin.ModelAdmin):
+# @admin.register(Profession)
+# class ProfessionAdmin(admin.ModelAdmin):
 
-    class Meta:
-        model = Profession
+#     class Meta:
+#         model = Profession
 
 
-@admin.register(Category)
-class TagAdmin(admin.ModelAdmin):
+# @admin.register(Category)
+# class TagAdmin(admin.ModelAdmin):
 
-    class Meta:
-        model = Category
+#     class Meta:
+#         model = Category
 
 
 # admin.site.register(Trainer, TrainerAdmin)
