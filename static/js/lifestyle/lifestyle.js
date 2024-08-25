@@ -62,7 +62,7 @@ function fetchFilteredData(text, wrap) {
       });
       items = [...document.querySelectorAll(".postItem")];
       len = items.length;
-      if (len > 3) loadMoreBtn.style.display = "block";
+      loadMoreItems(len, items);
     })
     .catch((error) => console.error("Error fetching data:", error));
 }
@@ -84,48 +84,37 @@ function getCookie(name) {
 }
 
 //?  For load more button
-let loadMoreBtn = document.querySelector(".postBtns button");
-let currentItem = 3;
+const loadMoreBtn = document.querySelector(".postBtns button");
+loadMoreBtn.addEventListener("click", clickBtn);
+const itemsPerPage = 3;
+let visibleItems = itemsPerPage;
 
-loadMoreBtn.addEventListener("click", (e) => {
-  for (var i = currentItem; i < currentItem + 3; i++) {
-    items[i].style.display = "block";
-    if (i == len - 1) break;
+function loadMoreItems(itemsLength, items) {
+  visibleItems = itemsPerPage;
+  if (itemsLength < 3) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "block";
   }
-  currentItem += 3;
-  if (currentItem >= items.length) loadMoreBtn.style.display = "none";
-});
 
-//  Load more Js - Django
-// const load_btn = document.querySelector(".postNav ul li");
-// let visible = 3;
+  items.forEach((item, index) => {
+    if (index >= visibleItems) {
+      item.style.display = "none";
+    }
+  });
+}
+function clickBtn() {
+  items = [...document.querySelectorAll(".postItem")];
+  len = items.length;
+  let index = 0;
+  visibleItems += itemsPerPage;
+  items.forEach((item, index) => {
+    if (index < visibleItems) {
+      item.style.display = "block";
 
-// function posts() {
-//   fetch(`http://127.0.0.1:8000/trainer/posts-json/${visible}`)
-//     .then((response) => response.json())
-//     .then((response) => {
-//       // console.log(response.data);
-//       maxSize = response.max_size;
-//       const data = response.data;
-//       // spinnerBox.classList.remove("not-visible");
-//       // setTimeout(() => {
-//       // spinnerBox.classList.add("not-visible");
-//       response.data.map((post) => {
-//         console.log(post.id);
-//         // postsBox.innerHTML += ``;
-//       });
-//       // }, 500);
-
-//       if (maxSize) {
-//         console.log("done");
-//         // loadBox.innerHTML=`<h4>no more</h4>`
-//       }
-//     });
-// }
-
-// posts();
-
-// load_btn.addEventListener("click", (e) => {
-//   visible += 3;
-//   posts();
-// });
+      if (index == len - 1) {
+        loadMoreBtn.style.display = "none";
+      }
+    }
+  });
+}
