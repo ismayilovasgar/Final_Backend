@@ -384,7 +384,7 @@
             <div class="trainersList">
                 <div class="listWrap">
 
-                    {% for trainer  in trainers %}
+                    {% comment %} {% for trainer  in trainers %}
                         <div class="trainerItem">
                             <div class="profile">
                                 <img src="{{ trainer.image.url }}" alt="">
@@ -396,7 +396,7 @@
                             
                             </div>
                         </div>
-                    {% endfor %}
+                    {% endfor %} {% endcomment %}
 
                     {% comment %} <div class="trainerItem">
                         <div class="profile">

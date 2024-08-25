@@ -38,9 +38,23 @@ def get_image_upload_path(instance, filename):
 
 # Create your models here.
 class Trainer(models.Model):
+
+    PROFESSION_CHOICES = [
+        ("Yoga Master", "Yoga Master"),
+        ("Personal trainer", "Personal Trainer"),
+        ("Boxer", "Boxer"),
+        ("Business Analytic", "Business Analytic"),
+        ("Other", "Other"),
+    ]
     # user  info
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
+    profession = models.CharField(
+        max_length=25,
+        choices=PROFESSION_CHOICES,
+        default="Yoga Master",
+        help_text="Select the one profession from these.",
+    )
     # profession = models.ForeignKey(Profession, on_delete=models.SET_NULL, null=True)
 
     image = models.ImageField(
@@ -59,27 +73,27 @@ class Trainer(models.Model):
 
     # ?  move info
     DIFFICULTY_CHOICES = [
-        ("beginner", "Beginner"),
-        ("intermediate", "Intermediate"),
-        ("advanced", "Advanced"),
+        ("Beginner", "Beginner"),
+        ("Intermediate", "Intermediate"),
+        ("Advanced", "Advanced"),
     ]
 
     TIME_OF_DAY_CHOICES = [
-        ("morning", "Morning"),
-        ("afternoon", "Afternoon"),
-        ("evening", "Evening"),
+        ("Morning", "Morning"),
+        ("Afternoon", "Afternoon"),
+        ("Evening", "Evening"),
     ]
 
     YOGA_STYLE_CHOICES = [
-        ("morning", "Morning Yoga"),
-        ("vinyasa", "Vinyasa Yoga"),
-        ("acro", "Acro Yoga"),
+        ("Morning Yoga", "Morning Yoga"),
+        ("Vinyasa Yoga", "Vinyasa Yoga"),
+        ("Acro Yoga", "Acro Yoga"),
     ]
 
     INTENSITY_CHOICES = [
-        ("level_1", "Level 1"),
-        ("level_2", "Level 2"),
-        ("level_3", "Level 3"),
+        ("Level 1", "Level 1"),
+        ("Level 2", "Level 2"),
+        ("Level 3", "Level 3"),
     ]
 
     CATEGORY_CHOICES = [

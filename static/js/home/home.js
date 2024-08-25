@@ -59,24 +59,36 @@ select_sorting.forEach((item) => {
     e.preventDefault();
   });
 });
+// ------------------------------------------------------------------------------------------------------
+const listWrap = document.querySelector(".trainersList  .listWrap");
+const allListItem = [...document.querySelectorAll("ul.list li")];
 
-//? Filter by category
-const list_category = [...document.querySelectorAll("ul.list li")];
-list_category.map((item) => {
+window.onload = function () {
+  fetchFilteredData("Yoga", listWrap);
+  markFirstItem();
+};
+
+function markFirstItem() {
+  // Select the first item in the list
+  const firstItem = document.querySelector("ul.list li");
+
+  // Apply a CSS class to mark the first item
+  if (firstItem) firstItem.classList.add("selected");
+}
+
+allListItem.map((item) => {
   item.addEventListener("click", (e) => {
-    document
-      .querySelectorAll("#popup li")
-      .forEach((el) => el.classList.remove("selected"));
+    // remove all selected tag
+    allListItem.forEach((el) => el.classList.remove("selected"));
+    // add selected tag to special item
     item.classList.toggle("selected");
 
-    fetchFilteredData(`${item.textContent}`);
+    fetchFilteredData(`${item.textContent}`, listWrap);
   });
 });
 
-// gpt
-const listWrap = document.querySelector(".trainersList  .listWrap");
-function fetchFilteredData(text) {
-  listWrap.innerHTML = "";
+function fetchFilteredData(text, wrap) {
+  wrap.innerHTML = "";
 
   fetch(`http://127.0.0.1:8000/trainer/${text}/`, {
     method: "POST",
@@ -84,20 +96,21 @@ function fetchFilteredData(text) {
       "Content-Type": "application/json",
       "X-CSRFToken": getCookie("csrftoken"),
     },
-    body: JSON.stringify(text),
+    body: JSON.stringify("text"),
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("receive data:", data);
+      // console.log("receive data:", data);
+
       data.map((trainer) => {
-        listWrap.innerHTML += `
+        wrap.innerHTML += `
         <div class="trainerItem">
             <div class="profile">
               <img src="media/${trainer.image}" alt="">
             </div>
             <div class="trainerName">${trainer.first_name} ${trainer.last_name}</div>
             <div class="trainerPosition">
-              ${trainer.category}      
+              ${trainer.profession}      
             </div>
         </div>
         `;
