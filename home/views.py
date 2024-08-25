@@ -1,13 +1,16 @@
 from django.shortcuts import render
-from .models import Trainer
+from .models import Trainer, Review
 
 
 # Create your views here.
 # Create your views here.
 def home__page(request):
-    trainers = Trainer.objects.all()
+    # trainers = Trainer.objects.all()
+    reviews = Review.objects.all()
+
     context = {
-        "trainers": trainers,
+        # "trainers": trainers,
+        "reviews": reviews,
     }
     return render(request, "home.html", context)
 
@@ -21,7 +24,13 @@ def pricing__page(request):
 
 
 def features__page(request):
-    return render(request, "features.html")
+    reviews = Review.objects.all()
+    context = {
+        # "trainers": trainers,
+        "reviews": reviews,
+    }
+
+    return render(request, "features.html", context)
 
 
 def download__page(request):

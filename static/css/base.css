@@ -52,7 +52,7 @@
 }
 
 .headerCenter .headerGroups ul li i {
-  font-size: 20px;
+  font-size: 14px;
   color: var(--Neutrals-4);
 }
 
@@ -69,8 +69,7 @@
 }
 
 .headerLinksWrap .headerNav .headerLink:hover,
-.headerCenter .headerGroups ul li:hover
-{
+.headerCenter .headerGroups ul li:hover {
   color: var(--section-text);
 }
 .headerLinksWrap .headerNav .drop {
@@ -644,7 +643,7 @@ footer .bar_wrapper ul i {
   color: var(--Neutrals-4);
 }
 footer .bar_wrapper ul li i:hover {
-  color: var(--Neutrals-1);
+  color: var(--class-filter-text);
   transition: all 0.3s ease-in;
 }
 /* ! Footer End */

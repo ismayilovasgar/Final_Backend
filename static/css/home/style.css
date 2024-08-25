@@ -733,9 +733,12 @@
   color: var(--Neutrals-8);
 }
 .trainers .trainersList .listWrap {
+  padding: 10px 0px;
   display: flex;
   align-items: flex-start;
-  min-height: 50vh; /* dont change appearenc in feth js */
+  min-height: calc(
+    20vh + var(--trainer-row-gap)
+  ); /* dont change appearenc in feth js */
   flex-wrap: wrap;
   column-gap: var(--trainer-col-gap);
   row-gap: var(--trainer-row-gap);

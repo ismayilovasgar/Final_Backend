@@ -130,29 +130,30 @@ form button i {
   padding-bottom: 80px;
 }
 
-.post .postTabs .postNav {
+.post .postTabs .postNav ul {
   display: flex;
   column-gap: 12px;
   align-items: center;
   justify-content: center;
 }
 
-.post .postTabs .postNav a {
+.post .postTabs .postNav ul li {
   padding: 6px 12px;
+  background-color: transparent;
+  transition: all 0.4s ease;
+  border-radius: 90px;
   color: var(--Neutrals-4, #777e90);
   font-family: "SF Pro Display", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
-  border-radius: 100px;
-  border: transparent;
-  background-color: transparent;
-  transition: all 0.8s ease;
 }
-.post .postTabs .postNav a:hover,
-.post .postTabs .postNav a.active {
-  border-radius: 100px;
+
+.post .postTabs .postNav ul li:hover {
+  cursor: pointer;
+}
+.post .postTabs .postNav li.selected {
   background-color: var(--Neutrals-3, #353945);
   color: var(--Neutrals-8, #fcfcfd);
 }
@@ -170,17 +171,28 @@ form button i {
   overflow: hidden;
   border: 2px solid var(--Neutrals-8);
   border-radius: 12px;
+  height: 305px;
+  width: 100%;
 }
 
 .postBox .postItem .postPreview img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: all 0.5s ease;
 }
 .postBox .postItem {
+  display: none;
   padding-bottom: 40px;
   border-bottom: 2px solid var(--Neutrals-6);
 }
+
+.postBox .postItem:nth-child(1),
+.postBox .postItem:nth-child(2),
+.postBox .postItem:nth-child(3) {
+  display: block;
+}
+
 .postBox .postItem:hover {
   cursor: pointer;
 }
@@ -207,21 +219,21 @@ form button i {
   margin-bottom: 16px;
 }
 
-.postBox .postItem .postStatus.fitness {
+.postBox .postItem .postStatus.Fitness_Gym {
   background: var(--Primary-1, #ff592c);
-  color: var(--Neutrals-8, #fcfcfd);
+  color: var(--Neutrals-6);
 }
-.postBox .postItem .postStatus.yoga {
+.postBox .postItem .postStatus.Yoga {
   background: var(--Primary-4, #45b26b);
-  color: var(--Neutrals-8, #fcfcfd);
+  color: var(--Neutrals-6);
 }
-.postBox .postItem .postStatus.new {
+.postBox .postItem .postStatus.Running {
   background: var(--Primary-3, #ef466f);
-  color: var(--Neutrals-8, #fcfcfd);
+  color: var(--Neutrals-6);
 }
-.postBox .postItem .postStatus.featured {
-  background: var(--Neutrals-2, #23262f);
-  color: var(--Neutrals-8, #fcfcfd);
+.postBox .postItem .postStatus.Gymnastics {
+  background: #3153bb;
+  color: var(--Neutrals-6);
 }
 
 .postBox .postItem .postSubtitle {
@@ -243,6 +255,16 @@ form button i {
   display: flex;
   column-gap: 12px;
   align-items: center;
+}
+.postBox .postItem .postUser .postAvatar {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.postBox .postItem .postUser .postAvatar img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .postBox .postItem .postFoot .postAuthor,

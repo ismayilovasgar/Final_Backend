@@ -90,7 +90,7 @@ allListItem.map((item) => {
 function fetchFilteredData(text, wrap) {
   wrap.innerHTML = "";
 
-  fetch(`http://127.0.0.1:8000/trainer/${text}/`, {
+  fetch(`http://127.0.0.1:8000/trainer/home/${text}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

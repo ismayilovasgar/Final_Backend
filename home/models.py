@@ -2,28 +2,6 @@ from django.db import models
 import os
 
 
-# choices: Provides a list of choices for the field
-# SKILL_CHOICES = [
-#     ("Yoga trainer", "Yoga"),
-#     ("personal trainer", "Personal Trainer"),
-#     ("Boxer Trainer", "Boxer"),
-#     ("Business Analytic", "Business Analytic"),
-# ]
-# class Category(models.Model):
-#     name = models.CharField(max_length=40)
-
-#     def __str__(self) -> str:
-#         return f"{self.name}"
-
-
-# class Profession(models.Model):
-#     name = models.CharField(max_length=50)
-#     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-
-#     def __str__(self) -> str:
-#         return f"{self.name}"
-
-
 def get_image_upload_path(instance, filename):
     """
     Generate the upload path for the image based on the product's name.
@@ -71,7 +49,7 @@ class Trainer(models.Model):
         max_length=100, blank=True, null=True, default="https://www.instagram.com/"
     )
 
-    # ?  move info
+    # ?  move choices
     DIFFICULTY_CHOICES = [
         ("Beginner", "Beginner"),
         ("Intermediate", "Intermediate"),
@@ -103,6 +81,13 @@ class Trainer(models.Model):
         ("Running", "Running"),
     ]
 
+    MAIN_CATEGORY_CHOICES = [
+        ("Lifestyle", "Lifestyle"),
+        ("Fitness", "Fitness"),
+        ("Mindfulness", "Mindfulness"),
+    ]
+
+    # ? Fields
     move_title = models.CharField(max_length=40, null=True)
     move_image = models.ImageField(
         upload_to=get_image_upload_path, default="move_avatar.jpg"
@@ -146,8 +131,40 @@ class Trainer(models.Model):
         max_length=25,
         choices=CATEGORY_CHOICES,
         default="Yoga",
-        help_text="Select the category of the product.",
+        help_text="Select the category of the move.",
+    )
+
+    # Add the category field to the model
+    main_category = models.CharField(
+        max_length=25,
+        choices=MAIN_CATEGORY_CHOICES,
+        default="Lifestyle",
+        help_text="Select the main category of the move.",
     )
 
     def __str__(self) -> str:
         return f"{self.first_name} | {self.last_name}"
+
+
+def get_review_upload_path(instance, filename):
+    """
+    Generate the upload path for the image based on the product's name.
+    Spaces in the name are replaced with underscores.
+    """
+    # Generate folder name by replacing spaces with underscores
+    folder_name = instance.author.replace(" ", "_")
+
+    # Construct the full upload path
+    return os.path.join("review", folder_name, filename)
+
+
+class Review(models.Model):
+    author = models.CharField(max_length=40)
+    logo = models.ImageField(
+        upload_to=get_review_upload_path, default="review_avatar.png"
+    )
+    content = models.TextField(max_length=250)
+    desginer = models.CharField(max_length=40)
+
+    def __str__(self) -> str:
+        return f"{self.author} "

@@ -453,9 +453,43 @@
     </section>
     {% comment %} <!--! trainers End  --> {% endcomment %}
 
-    {% comment %}? <!--? review Start  --> {% endcomment %}
-    {% include "includes_partials/review.html" with theme="lightmode" %}
-    {% comment %} <!--? review End  --> {% endcomment %}
+    {% comment %}? <!-- * Slider --> {% endcomment %}
+    <section class="review lightmode">
+        <div class="container">
+
+            <div class="review-swiper">
+
+                <div class="review-swiper-content">
+                    <div class="swiper-wrapper">
+
+                        {% for review in reviews %}
+                        <div class="swiper-slide">
+                            <div class="reviewItem">
+                                <div class="reviewLogo">
+                                    <img src="{{ review.logo.url}}" alt="">
+                                </div>
+                                <div class="reviewTitle"> {{ review.content}}
+                                </div>
+                                <div class="reviewAuthor">{{ review.author }}</div>
+                                <div class="reviewPosition">{{ review.designer }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="reviewBtns">
+                <button class="previoustBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="nextBtn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+
+        </div>
+    </section>
+    {% comment %}! <!--! review End  --> {% endcomment %}
 
 
     {% comment %}? <!--? quality Start  --> {% endcomment %}

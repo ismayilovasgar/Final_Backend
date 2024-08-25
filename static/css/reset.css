@@ -21,20 +21,16 @@
   --Neutrals-8: #fcfcfd;
   --section_back_color: #fcfcfd;
   --section_back_color_soft: #f4f5f6;
-  --class-filter-text:color: #23262F;
-  --class-crumb-back:#e6e8ec;
-  --section-text:#23262f;
-  --soft-lightmode-dark:#f4f5f6;
-  --table-column-different:#FCFCFD;
-  --table-column-same:#FCFCFD;
-  --table-column-mobil:#FCFCFD;
-  --product-card-back-color:#E6E8EC;
-  --icon-dark-light-mode:#f4f5f6;
-
-
+  --class-filter-text: #23262f;
+  --class-crumb-back: #e6e8ec;
+  --section-text: #23262f;
+  --soft-lightmode-dark: #f4f5f6;
+  --table-column-different: #fcfcfd;
+  --table-column-same: #fcfcfd;
+  --table-column-mobil: #fcfcfd;
+  --product-card-back-color: #e6e8ec;
+  --icon-dark-light-mode: #f4f5f6;
 }
-
-
 
 [theme="dark"] {
   --Neutrals-1: #141416;
@@ -48,15 +44,13 @@
   --section_back_color: #141416;
   --section_back_color_soft: #23262f;
   --class-filter-text: #fcfcfd;
-  --class-crumb-back:#353945;
-  --section-text:#fcfcfd;
-  --soft-lightmode-dark:#141416;
-  --table-column-different:#23262F;
-  --table-column-mobil:#23262F;
-  --product-card-back-color:#353945;
-  --icon-dark-light-mode:#23262f;
-
-
+  --class-crumb-back: #353945;
+  --section-text: #fcfcfd;
+  --soft-lightmode-dark: #141416;
+  --table-column-different: #23262f;
+  --table-column-mobil: #23262f;
+  --product-card-back-color: #353945;
+  --icon-dark-light-mode: #23262f;
 }
 .lightmode {
   background-color: var(--section_back_color);

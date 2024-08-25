@@ -10,6 +10,13 @@ class TrainerAdmin(admin.ModelAdmin):
         model = Trainer
 
 
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+
+    class Meta:
+        model = Review
+
+
 # @admin.register(Profession)
 # class ProfessionAdmin(admin.ModelAdmin):
 

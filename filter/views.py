@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
-from home.models import *
+from home.models import Trainer
+from django.views.generic import View, TemplateView
 
 
 # Create your views here.
-def filter_by_categry(request, category):
+def filter_by_category(request, category):
     print(f"filter text: {category} ")
 
     if request.method == "POST":
@@ -19,3 +19,34 @@ def filter_by_categry(request, category):
             return print("eerr-------------------------")
     else:
         return JsonResponse({"error": "Bad request"}, status=400)
+
+
+def filter_by_main_category(request, lifestyle):
+
+    # print(f"filter text: {lifestyle} ")
+
+    if request.method == "POST":
+        try:
+            trainers = Trainer.objects.filter(main_category=lifestyle)
+            trainer_data = [
+                {
+                    "firstname": trainer.first_name,
+                    "lastname": trainer.last_name,
+                    "started_date": trainer.started_date.strftime("%b %d, %Y"),
+                    "move_title": trainer.move_title,
+                    "trainer_category": trainer.category.replace(" & ", "_"),
+                    "trainer_image_url": trainer.image.url,
+                    "move_image_url": trainer.move_image.url,
+                }
+                for trainer in trainers
+            ]
+
+            return JsonResponse({"trainer_data": trainer_data})
+
+        except:
+            return print("eerr-------------------------")
+    else:
+        return JsonResponse({"error": "Bad request"}, status=400)
+
+
+

@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
+# DATE_FORMAT = "M d, Y"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
