@@ -44,21 +44,23 @@ function fetchFilteredData(text, wrap) {
       data.trainer_data.map((trainer) => {
         wrap.innerHTML += `
         <div class="postItem">
-           <div class="postPreview">
-              <img src="${trainer.move_image_url}" alt="">
-           </div>
-           <div class="postStatus ${trainer.trainer_category}">${trainer.trainer_category}</div>
-           <div class="postSubtitle">${trainer.move_title}</div>
-           <div class="postFoot">
-             <div class="postUser">
-             <div class="postAvatar">
-                <img src="${trainer.trainer_image_url}" alt="">
-             </div>
-             <div class="postAuthor">${trainer.firstname} ${trainer.lastname}</div>
-           </div>
-           <div class="postDate">${trainer.started_date}</div>
-         </div>
-     </div>`;
+          <a href="/singleblog/${trainer.id}" >
+            <div class="postPreview">
+                <img src="${trainer.move_image_url}" alt="">
+            </div>
+            <div class="postStatus ${trainer.trainer_category}">${trainer.trainer_category}</div>
+            <div class="postSubtitle">${trainer.move_title}</div>
+            <div class="postFoot">
+                <div class="postUser">
+                  <div class="postAvatar">
+                    <img src="${trainer.trainer_image_url}" alt="">
+                  </div>
+                 <div class="postAuthor">${trainer.firstname} ${trainer.lastname}</div>
+                </div>
+                <div class="postDate">${trainer.started_date}</div>
+              </div>
+            </a>
+       </div>`;
       });
       items = [...document.querySelectorAll(".postItem")];
       len = items.length;

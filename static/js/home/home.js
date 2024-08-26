@@ -59,6 +59,8 @@ select_sorting.forEach((item) => {
     e.preventDefault();
   });
 });
+
+
 // ------------------------------------------------------------------------------------------------------
 const listWrap = document.querySelector(".trainersList  .listWrap");
 const allListItem = [...document.querySelectorAll("ul.list li")];

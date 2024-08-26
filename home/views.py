@@ -5,11 +5,11 @@ from .models import Trainer, Review
 # Create your views here.
 # Create your views here.
 def home__page(request):
-    # trainers = Trainer.objects.all()
+    trainers = Trainer.objects.all()
     reviews = Review.objects.all()
 
     context = {
-        # "trainers": trainers,
+        "categorys": Trainer.CATEGORY_CHOICES,
         "reviews": reviews,
     }
     return render(request, "home.html", context)
@@ -41,8 +41,10 @@ def lifestyle__page(request):
     return render(request, "lifestyle.html")
 
 
-def singleblog__page(request):
-    return render(request, "single_blog.html")
+def singleblog__page(request, id):
+    trainer = Trainer.objects.get(id=id)
+    context = {"trainer": trainer}
+    return render(request, "single_blog.html", context)
 
 
 def class01__page(request):
@@ -58,7 +60,10 @@ def class01detail__page(request):
 
 
 def class02__page(request):
-    return render(request, "class_02.html")
+    context = {
+        "categorys": Trainer.CATEGORY_CHOICES,
+    }
+    return render(request, "class_02.html", context)
 
 
 def class02detail__page(request):
