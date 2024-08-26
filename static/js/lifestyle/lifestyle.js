@@ -93,7 +93,8 @@ let visibleItems = itemsPerPage;
 
 function loadMoreItems(itemsLength, items) {
   visibleItems = itemsPerPage;
-  if (itemsLength < 2) {
+
+  if (itemsLength <= 3) {
     loadMoreBtn.style.display = "none";
   } else {
     loadMoreBtn.style.display = "block";
