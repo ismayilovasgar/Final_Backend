@@ -58,6 +58,7 @@ def filter_by_main(request, text):
 def filter_select_values(trainers):
     trainer_data = [
         {
+            # key : value
             "id": trainer.id,
             "firstname": trainer.first_name,
             "lastname": trainer.last_name,

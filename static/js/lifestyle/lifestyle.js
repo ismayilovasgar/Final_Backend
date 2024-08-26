@@ -21,7 +21,7 @@ allListItem.map((item) => {
     allListItem.forEach((el) => el.classList.remove("selected"));
     // add selected tag to special item
     item.classList.toggle("selected");
-    // posts();
+
     fetchFilteredData(`${item.textContent}`, listWrap);
     currentItem = 3;
   });
@@ -93,7 +93,7 @@ let visibleItems = itemsPerPage;
 
 function loadMoreItems(itemsLength, items) {
   visibleItems = itemsPerPage;
-  if (itemsLength < 3) {
+  if (itemsLength < 2) {
     loadMoreBtn.style.display = "none";
   } else {
     loadMoreBtn.style.display = "block";
