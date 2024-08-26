@@ -1,24 +1,10 @@
 // Get the modal
-const modal = document.getElementById("myModal");
-const trainers = document.querySelectorAll(".trainers .listWrap ");
-const closeBtn = document.querySelector(".modal .modalCloseBtn");
 
-trainers.forEach((trainer) => {
-  trainer.addEventListener("click", (e) => {
-    console.log("9+++");
-    modal.style.display = "block";
-  });
-});
-
-closeBtn.addEventListener("click", (e) => {
-  modal.style.display = "none";
-});
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+// window.onclick = function (event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// };
 
 // ! Swiper - 1
 let swiper_programs = new Swiper(".programs_swiper", {
@@ -110,8 +96,7 @@ function fetchFilteredData(text, wrap) {
     .then((response) => response.json())
     .then((data) => {
       data.trainer_data.map((trainer) => {
-        wrap.innerHTML += 
-        `
+        wrap.innerHTML += `
         <div class="trainerItem">
             <div class="profile">
               <img src="${trainer.trainer_image_url}" alt="">
@@ -119,7 +104,98 @@ function fetchFilteredData(text, wrap) {
             <div class="trainerName">${trainer.firstname} ${trainer.lastname}</div>
             <div class="trainerPosition"> ${trainer.profession} </div>
         </div>
+
+        <div class="modal" id="">
+                    <div class="modalContent">
+                        <div class="popupContainer">
+
+                            <div class="trainerTop">
+                                <div class="trainerAvatar">
+                                    <img src="${trainer.trainer_image_url}" alt="">
+                                </div>
+                                <div class="trainerName">${trainer.firstname} ${trainer.lastname}</div>
+                                <div class="trainerPosition">${trainer.profession}</div>
+                                <div class="trainerSocials">
+                                    <a href="#" target="_blank" class="trainer_social">
+                                        <i class="ri-facebook-circle-line"></i>
+                                    </a>
+                                    <a href="#" target="_blank" class="trainer_social">
+                                        <i class="ri-instagram-line"></i>
+                                    </a>
+                                    <a href="#" target="_blank" class="trainer_social">
+                                        <i class="ri-twitter-line"></i>
+                                    </a>
+                                    <a href="#" target="_blank" class="trainer_social">
+                                        <i class="ri-linkedin-box-line"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <form action="" method="/" class="subscriptionInput">
+                                <input class="subscription__input" type="email" placeholder="Find a class"
+                                    required="required">
+                                <button class="subscriptionBtn">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </form>
+
+                            <div class="trainerModalWrap">
+                                <div class="trainerSlider">
+                                    <a href="#" target="_blank">
+                                        <div class="card">
+                                            <div class="trainerPreview">
+                                                <img src="${trainer.move_image_url}" alt="">
+                                                <p>Fitness</p>
+                                            </div>
+                                            <div class="modalTrainerHead">
+                                                <div class="trainer__title">Power Yoga Sculpt</div>
+                                                <div class="trainerLevel">${trainer.move_level}</div>
+                                            </div>
+                                            <div class="trainerParameters">
+                                                <div class="trainerParameter">
+                                                   <i class="fa-brands fa-youtube"></i> 7
+                                                </div>
+                                                <div class="trainerParameter">
+                                                   <i class="fa-regular fa-user"></i> 160
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="bottomBtns">
+                                <div class="arrowBtns">
+                                    <i class="fa-solid fa-left-long"></i>
+                                   <i class="fa-solid fa-right-long"></i>
+                                </div>
+                                <button class="btn btn_orange">Browse all class</button>
+                            </div>
+
+                            <button title="Close (Esc)" type="button" class="modalCloseBtn">
+                               <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </div>
+                    </div>
+            </div>
         `;
+      });
+      const modal = document.querySelectorAll(".modal");
+      const trainers = [...document.querySelectorAll(".listWrap .trainerItem")];
+      const closeBtns = [...document.querySelectorAll(".modal .modalCloseBtn")];
+
+      trainers.forEach((trainer) => {
+        trainer.addEventListener("click", (e) => {
+          trainer.nextElementSibling.style.display = "block";
+          e.preventDefault();
+        });
+      });
+
+      closeBtns.forEach((closeBtn) => {
+        closeBtn.addEventListener("click", (e) => {
+          closeBtn.closest(".modal").style.display = "none";
+        });
       });
     })
     .catch((error) => console.error("Error fetching data:", error));
@@ -140,11 +216,3 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-
-// <a href="#" class="trainerItem">
-//             <div class="profile">
-//               <img src="media/${trainer.image}" alt="">
-//             </div>
-//             <div class="trainerName">${trainer.first_name} ${trainer.last_name}</div>
-//             <div class="trainerPosition"> ${trainer.profession} </div>
-//         </a>

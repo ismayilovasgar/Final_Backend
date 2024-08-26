@@ -67,6 +67,7 @@ def filter_select_values(trainers):
             "trainer_category": trainer.category.replace(" & ", "_"),
             "trainer_image_url": trainer.image.url,
             "move_image_url": trainer.move_image.url,
+            "move_level": trainer.intensity_level,
         }
         for trainer in trainers
     ]
