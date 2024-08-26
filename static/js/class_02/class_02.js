@@ -42,6 +42,7 @@ select_sorting.forEach((item) => {
   item.addEventListener("click", (e) => {
     item.querySelector("i").classList.toggle("changeDirection");
     item.classList.toggle("focus");
+    item.querySelector(".select_arrow").classList.toggle("focus");
     item.querySelector("ul.list").classList.toggle("show");
     sorting_list_items = item.querySelectorAll("ul li");
     sorting_list_items.forEach((list_item) => {

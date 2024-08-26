@@ -104,14 +104,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px;
-    box-shadow: inset 0 0 0 2px #e6e8ec;
     background: var(--Neutrals-8);
     border-radius: 12px;
     opacity: 1;
     font-size: 14px;
     font-weight: 500;
     line-height: 48px;
-    border: 2px solid var(--Neutrals-6, #e6e8ec);
+    border: 2px solid var(--Neutrals-6);
   }
   .select .select_arrow i {
     display: flex;
@@ -126,7 +125,8 @@
   }
 
   .focus {
-    border-color: var(--Neutrals-3);
+    border-color: var(--Neutrals-4);
+    /* box-shadow: inset 0 0 0 2px #4b6baa; */
   }
   .select .select_arrow {
     display: block;
@@ -135,7 +135,7 @@
     color: var(--section-text);
     padding: 4px;
   }
-  .select .select_arrow.selected {
+  .select .select_arrow.focus {
     border-color: #23262f;
   }
 
