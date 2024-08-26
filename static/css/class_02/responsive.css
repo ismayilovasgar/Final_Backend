@@ -85,6 +85,8 @@
 
   .select {
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -256,11 +258,15 @@
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 550px) {
   :root {
     --trainers_columns-count: 1;
   }
-
+  .modalContent {
+    padding: 20px;
+  }
+}
+@media screen and (max-width: 350px) {
   .heroHeader .wrap .contentCol .overlap button {
     border-radius: 12px;
   }

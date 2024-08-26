@@ -383,7 +383,7 @@ option {
       var(--trainers_columns-count)
   );
 
-  transition: 0.2s ease;
+  transition: all 0.2s ease-in;
 }
 .trainers .trainersList .listWrap .trainerItem:hover {
   border-color: var(--Neutrals-5);
@@ -402,6 +402,7 @@ option {
 }
 .trainers .trainersList .listWrap .trainerItem .profile img {
   width: 100%;
+  object-fit: cover;
 }
 /* .trainers .trainersList .trainerItem:hover .profile {
   box-shadow: 0 0 0 2px #ff592c;

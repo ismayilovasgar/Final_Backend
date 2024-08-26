@@ -1,10 +1,11 @@
 // Get the modal
 const modal = document.getElementById("myModal");
-const trainers = document.querySelectorAll(".trainers .listWrap a");
+const trainers = document.querySelectorAll(".trainers .listWrap ");
 const closeBtn = document.querySelector(".modal .modalCloseBtn");
 
 trainers.forEach((trainer) => {
   trainer.addEventListener("click", (e) => {
+    console.log("9+++");
     modal.style.display = "block";
   });
 });
@@ -109,14 +110,15 @@ function fetchFilteredData(text, wrap) {
     .then((response) => response.json())
     .then((data) => {
       data.trainer_data.map((trainer) => {
-        wrap.innerHTML += `
-        <a href="#" class="trainerItem">
+        wrap.innerHTML += 
+        `
+        <div class="trainerItem">
             <div class="profile">
               <img src="${trainer.trainer_image_url}" alt="">
             </div>
             <div class="trainerName">${trainer.firstname} ${trainer.lastname}</div>
             <div class="trainerPosition"> ${trainer.profession} </div>
-        </a>
+        </div>
         `;
       });
     })
