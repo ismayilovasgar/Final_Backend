@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from home.models import Trainer
 from django.views.generic import View, TemplateView
 import json
+from django.db.models import Q
 
 
 # Create your views here.
@@ -55,6 +56,24 @@ def filter_by_main(request, text):
         return JsonResponse({"error": "Bad request"}, status=400)
 
 
+def filter_by_name(request, name):
+    # if request.method == "POST":
+    #     name = request.POST.get("name_search")
+    #     if name:
+    #         results = Trainer.objects.filter(
+    #             Q(first_name__icontains=name) | Q(last_name__icontains=name)
+    #         )
+
+    # context = {
+    #     "results": results,
+    # }
+
+    # return render(request, "class_01.html", context)
+    print(name)
+    pass
+
+
+# ! Other def use for format data as json
 def filter_select_values(trainers):
     trainer_data = [
         {

@@ -20,7 +20,7 @@ select.addEventListener("click", (e) => {
   });
 });
 
-//* sorting-select
+//? sorting-select
 const select_sorting = document.querySelectorAll(".sorting");
 let sorting_list_items = "";
 select_sorting.forEach((item) => {
@@ -84,3 +84,40 @@ var swiper = new Swiper(".testimonials-swiper", {
     },
   },
 });
+
+//? Fetch Data From Django url
+const button = document.querySelector("form button");
+button.addEventListener("click", (e) => {});
+
+const fetchPost = async (search_text, wrap) => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/trainer/lifestyle/${search_text}/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify("search_text"),
+    }
+  ).catch((error) => console.error("Error fetching data:", error));
+  const data = await response.json();
+
+  data.forEach((item) => {});
+};
+
+//! Function to get CSRF token from cookies
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}

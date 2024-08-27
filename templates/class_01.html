@@ -58,9 +58,9 @@
     <div class="container">
       <div class="catalogHead">
         <div class="catalogTitle">Find a class that fit with you</div>
-        <form action="" class="catalogSearch" id="catalog_search">
-          <input class="catalogInput" id="catalog_input" type="text" placeholder="Find a class">
-
+        <form action="" class="catalogSearch" id="catalog_search" method="POST">
+          {% csrf_token %}
+          <input class="catalogInput" id="catalog_input" type="text" placeholder="Find a class" name="name_search">
           <button type="submit" class="catalogResult">
             <i class="fa-solid fa-magnifying-glass"></i>
             {% comment %} <img src="./assets/images/catalog/search.svg" alt="" /> {% endcomment %}
@@ -75,7 +75,6 @@
             <input type="text" name="release" class="current" value="Newest" />
             <div class="select_arrow">
               <i class="fa-solid fa-angle-down"></i>
-              <!-- <i class="fa-solid fa-angle-up"></i> -->
             </div>
             <ul class="list">
               <li data-value="Newest" class="option selected">Newest</li>
@@ -103,12 +102,10 @@
           <button class="catalogFilter">
             <div class="catalogText">Filter</div>
             <i class="fa-solid fa-xmark"></i>
-            {% comment %} <img class="closeFilter" src="./assets/images/catalog/close.svg" alt="" /> {% endcomment %}
           </button>
           <button class="advancedFilter">
             <div class="catalogText">Advanced Filter</div>
             <i class="fa-solid fa-xmark"></i>
-            {% comment %} <img class="closeFilter" src="./assets/images/catalog/close.svg" alt="" /> {% endcomment %}
           </button>
         </div>
 
@@ -129,7 +126,7 @@
             </div>
 
           </div>
-          <!--  -->
+         
           <div class="catalogCell">
             <div class="cataloglabel">Time of Day</div>
 
@@ -146,7 +143,7 @@
             </div>
 
           </div>
-          <!--  -->
+         
           <div class="catalogCell">
             <div class="cataloglabel">Difficluty</div>
 
@@ -163,7 +160,7 @@
             </div>
 
           </div>
-          <!--  -->
+         
           <div class="catalogCell">
             <div class="cataloglabel">Intensity</div>
 
@@ -179,14 +176,116 @@
             </div>
 
           </div>
-          <!--  -->
+         
         </div>
       </div>
 
       
-      {% comment %}? include card html {% endcomment %}
-       {% include "includes_partials/catalog_cards.html" %}
-      {% comment %}! include card html {% endcomment %}
+       {% comment %}?  card html {% endcomment %}       
+      <div class="catalogList">
+
+        <div class="card">
+            <div class="cardPreview">
+                <img src="{% static 'assets/common/catalog_card/card-pic-1.png' %}" alt="">
+                <div class="cardStatus yoga">yoga</div>
+            </div>
+      
+            <div class="cardHead">
+                <div class="cardUser">
+                    <div class="cardAvatar">
+                        <img src="{% static 'assets/common/catalog_card/cardUserAvatar-5.png' %}" alt="">
+                    </div>
+                    <div class="cardDetails">
+                        <div class="cardTitle">7-days barre body</div>
+                        <div class="cardTrainer">
+                            <span class="firstName">FistName LastName</span>
+                            <span class="lastName"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardLevel beginner">Beginner</div>
+            </div>
+      
+            <div class="cardParameters">
+                <div class="cardParameter">
+                    <img src="{% static 'assets/common/catalog_card/youtube.svg' %}" alt=""> 7
+                </div>
+                <div class="cardParameter">
+                    <img src="{% static 'assets/common/catalog_card/people.svg' %}" alt=""> 160
+                </div>
+            </div>
+        </div>
+       
+        <div class="card">
+            <div class="cardPreview">
+                <img class="backPreview" src="{% static 'assets/common/catalog_card/card-pic-2.png' %}" alt="">
+                <div class="cardStatus fitness">fitness </div>
+                <div class="playSmall">
+                    <img src="{% static 'assets/common/catalog_card/playSmall.svg' %}" alt="">
+                </div>
+            </div>
+      
+            <div class="cardHead">
+                <div class="cardUser">
+                    <div class="cardAvatar">
+                        <img src="{% static 'assets/common/catalog_card/cardUserAvatar-2.png' %}" alt="">
+                    </div>
+                    <div class="cardDetails">
+                        <div class="cardTitle">Sweet and tone</div>
+                        <div class="cardTrainer">
+                            <span class="firstName">FistName</span>
+                            <span class="lastName">LastName</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardLevel beginner">beginner</div>
+            </div>
+      
+            <div class="cardParameters">
+                <div class="cardParameter">
+                    <img src="{% static 'assets/common/catalog_card/youtube.svg' %}" alt=""> 7
+                </div>
+                <div class="cardParameter">
+                    <img src="{% static 'assets/common/catalog_card/people.svg' %}" alt=""> 160
+                </div>
+            </div>
+        </div>
+       
+        <div class="card">
+            <div class="cardPreview">
+                <img src="{% static 'assets/common/catalog_card/card-pic-3.png' %}" alt="">
+                <div class="cardStatus yoga">yoga</div>
+            </div>
+      
+            <div class="cardHead">
+                <div class="cardUser">
+                    <div class="cardAvatar">
+                        <img src="{% static 'assets/common/catalog_card/cardUserAvatar-3.png' %}" alt="">
+                    </div>
+                    <div class="cardDetails">
+                        <div class="cardTitle">Baseline Bootcamp</div>
+                        <div class="cardTrainer">
+                            <span class="firstName">FistName</span>
+                            <span class="lastName">LastName</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardLevel beginner">beginner</div>
+          </div>
+      
+          <div class="cardParameters">
+                <div class="cardParameter">
+                    <img src="{% static 'assets/common/catalog_card/youtube.svg' %}" alt=""> 7
+                </div>
+                <div class="cardParameter">
+                    <img src="{% static 'assets/common/catalog_card/people.svg' %}" alt=""> 160
+                </div>
+          </div>
+   
+        </div>
+       
+     </div> 
+      {% comment %}!  card html {% endcomment %}
 
       <div class="catalogBtn">
         <button class="discoverMore">
@@ -194,6 +293,7 @@
           <i class="fa-solid fa-angle-down"></i>
         </button>
       </div>
+
     </div>
   </section>
   {% comment %}! <!-- ! catalog End --> {% endcomment %}

@@ -28,6 +28,7 @@ allListItem.map((item) => {
 });
 let items = [];
 let len = 0;
+
 function fetchFilteredData(text, wrap) {
   wrap.innerHTML = "";
 
