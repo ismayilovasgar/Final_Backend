@@ -58,14 +58,15 @@
     <div class="container">
       <div class="catalogHead">
         <div class="catalogTitle">Find a class that fit with you</div>
-        <form action="" class="catalogSearch" id="catalog_search" method="POST">
-          {% csrf_token %}
+        {% comment %} <form action="" class="catalogSearch" id="catalog_search" method="POST"> {% endcomment %}
+        <div class="catalogSearch" id="catalog_search" >
+          {% comment %} {% csrf_token %} {% endcomment %}
           <input class="catalogInput" id="catalog_input" type="text" placeholder="Find a class" name="name_search">
           <button type="submit" class="catalogResult">
             <i class="fa-solid fa-magnifying-glass"></i>
-            {% comment %} <img src="./assets/images/catalog/search.svg" alt="" /> {% endcomment %}
           </button>
-        </form>
+        </div>
+        {% comment %} </form> {% endcomment %}
 
       </div>
 
@@ -84,18 +85,13 @@
 
           <div class="catalogNav">
             <ul>
-              <li>
-                <a class="cataloglink active" href="#">Yoga</a>
-              </li>
-              <li>
-                <a class="cataloglink" href="#">Fitness &amp; Gym</a>
-              </li>
-              <li>
-                <a class="cataloglink" href="#">Mindfulness</a>
-              </li>
-              <li>
-                <a class="cataloglink" href="#">Gymnastics</a>
-              </li>
+              {% for key,value in categorys  %}
+                  <li class="cataloglink" data-value="{{value| cut:" " }}">{{value}}</li>
+              {% endfor %}
+              {% comment %} <li class="cataloglink active">Yoga</li>
+              <li class="cataloglink">Fitness &amp; Gym</li>
+              <li  class="cataloglink">Mindfulness</li>
+              <li class="cataloglink">Gymnastics</li> {% endcomment %}
             </ul>
           </div>
 

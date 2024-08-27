@@ -77,19 +77,19 @@
   line-height: 32px;
   letter-spacing: -0.24px;
 }
-.catalogHead form.active-border {
+.catalogHead .catalogSearch.active-border {
   border-color: var(--Neutrals-4);
 }
-.catalogHead form {
+.catalogHead .catalogSearch {
   width: 40%;
-  padding: 8px 8px 8px 16px;
+  padding: 10px 8px 10px 16px;
   border-radius: 90px;
   border: 2px solid var(--Neutrals-6, #e6e8ec);
   display: flex;
   align-items: center;
   column-gap: 18px;
 }
-.catalogHead form input {
+.catalogHead .catalogSearch input {
   width: 100%;
   border: none;
   background-color: var(--Neutrals-8);
@@ -101,7 +101,7 @@
   font-weight: 400;
   line-height: 24px;
 }
-.catalogHead form button.catalogResult {
+.catalogHead .catalogSearch button.catalogResult {
   padding: 12px;
   background-color: var(--Primary-1);
   border-radius: 50%;
@@ -110,7 +110,7 @@
   align-items: center;
 }
 
-.catalogHead form button i {
+.catalogHead .catalogSearch button i {
   font-size: 14px;
   color: var(--Neutrals-6);
 }
@@ -230,14 +230,15 @@ ul.list li:hover {
 ul.list.show {
   display: block;
 }
-/*  */
+/*  catalog middle links*/
 
 .catalogTop .catalogNav ul {
   display: flex;
-  column-gap: 6px;
+  column-gap: 12px;
+  align-items: center;
+  justify-content: center;
 }
-.catalogTop .catalogNav a {
-  /* display: inline-block; */
+.catalogTop .catalogNav li.cataloglink {
   padding: 6px 12px;
   color: var(--Neutrals-4, #777e90);
   font-family: "SF Pro Display", sans-serif;
@@ -245,16 +246,6 @@ ul.list.show {
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
-}
-.catalogTop .catalogNav a:not(:last-child) {
-  margin-right: 12px;
-}
-
-.catalogTop .catalogNav a:hover,
-.catalogTop .catalogNav a.active {
-  border-radius: 100px;
-  background: var(--Neutrals-3);
-  color: var(--Neutrals-8, #fcfcfd);
 }
 
 .catalogTop .catalogFilter,
@@ -352,6 +343,7 @@ ul.list.show {
   );
 }
 .catalogList .card .cardPreview {
+  height: 300px;
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -361,6 +353,7 @@ ul.list.show {
 }
 .catalogList .card .cardPreview img {
   object-fit: cover;
+  height: 100%;
   width: 100%;
   transition: all 0.5s ease;
 }
@@ -430,6 +423,9 @@ ul.list.show {
 .catalogList .card .cardHead .cardUser .cardAvatar {
   width: 40px;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--Neutrals-4);
   border-radius: 50%;
   align-self: flex-start;

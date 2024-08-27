@@ -27,14 +27,17 @@ select_sorting.forEach((item) => {
   item.addEventListener("click", (e) => {
     item.querySelector("i").classList.toggle("changeDirection");
     item.classList.toggle("focus");
+
     item.querySelector(".select_arrow").classList.toggle("focus");
     item.querySelector("ul.list").classList.toggle("show");
+
     sorting_list_items = item.querySelectorAll("ul li");
     sorting_list_items.forEach((list_item) => {
       list_item.addEventListener("click", (e) => {
         item.querySelector("input.current").value = list_item.textContent;
       });
     });
+    e.preventDefault();
   });
 });
 
@@ -86,12 +89,27 @@ var swiper = new Swiper(".testimonials-swiper", {
 });
 
 //? Fetch Data From Django url
-const button = document.querySelector("form button");
-button.addEventListener("click", (e) => {});
+const catalogList = document.querySelector(".catalogList");
+// click button by trainer name
+const button = document.querySelector(".catalogSearch button");
+const inputText = document.querySelector(".catalogSearch input");
+
+button.addEventListener("click", (e) => {
+  fetchPost("name_" + inputText.value.trim(), catalogList);
+});
+
+// click button by category name
+const linkItems = document.querySelectorAll("ul li.cataloglink");
+linkItems.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    fetchPost("category_" + item.textContent, catalogList);
+  });
+});
 
 const fetchPost = async (search_text, wrap) => {
+  wrap.innerHTML = "";
   const response = await fetch(
-    `http://127.0.0.1:8000/trainer/lifestyle/${search_text}/`,
+    `http://127.0.0.1:8000/trainer/trainer_text/${search_text}/`,
     {
       method: "POST",
       headers: {
@@ -100,10 +118,47 @@ const fetchPost = async (search_text, wrap) => {
       },
       body: JSON.stringify("search_text"),
     }
-  ).catch((error) => console.error("Error fetching data:", error));
-  const data = await response.json();
+  )
+    .then((res) => res.json())
+    .then((resp) => {
+      resp.data.map((item) => {
+        wrap.innerHTML += `
+        <div class="card">
+            <div class="cardPreview">
+                <img src="${item.move_image_url}" alt="">
+                <div class="cardStatus yoga">${item.trainer_category}</div>
+            </div>
+      
+            <div class="cardHead">
+                <div class="cardUser">
+                    <div class="cardAvatar">
+                        <img src="${item.trainer_image_url}" alt="">
+                    </div>
+                    <div class="cardDetails">
+                        <div class="cardTitle">${item.move_title}</div>
+                        <div class="cardTrainer">
+                            <span class="firstName">${item.firstname} ${item.lastname} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardLevel beginner">${item.move_difficulty}</div>
+            </div>
+      
+            <div class="cardParameters">
+                <div class="cardParameter">
+                    <i class="fa-brands fa-youtube"></i> 7
+                </div>
+                <div class="cardParameter">
+                    <i class="fa-regular fa-user"></i> 160
+                </div>
+            </div>
+        </div>
+        `;
+      });
+    })
+    .catch((error) => console.error("Error fetching data:", error));
 
-  data.forEach((item) => {});
+  inputText.value = "";
 };
 
 //! Function to get CSRF token from cookies

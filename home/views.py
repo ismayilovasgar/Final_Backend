@@ -51,6 +51,7 @@ def class01__page(request):
     trainers = Trainer.objects.all()
     context = {
         "trainers": trainers,
+        "categorys": Trainer.CATEGORY_CHOICES,
     }
     return render(request, "class_01.html", context)
 

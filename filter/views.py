@@ -56,21 +56,19 @@ def filter_by_main(request, text):
         return JsonResponse({"error": "Bad request"}, status=400)
 
 
-def filter_by_name(request, name):
-    # if request.method == "POST":
-    #     name = request.POST.get("name_search")
-    #     if name:
-    #         results = Trainer.objects.filter(
-    #             Q(first_name__icontains=name) | Q(last_name__icontains=name)
-    #         )
+def filter_by_text(request, text):
+    suf_text = text.split("_")[1]
+    results = []
+    if text.split("_")[0].startswith("name"):
+        results = Trainer.objects.filter(
+            Q(first_name__startswith=suf_text) | Q(last_name__startswith=suf_text)
+        )
+    if text.split("_")[0].startswith("category"):
+        results = Trainer.objects.filter(category=suf_text)
 
-    # context = {
-    #     "results": results,
-    # }
+    data = filter_select_values(results)
 
-    # return render(request, "class_01.html", context)
-    print(name)
-    pass
+    return JsonResponse({"data": data}, safe=False)
 
 
 # ! Other def use for format data as json
@@ -78,15 +76,24 @@ def filter_select_values(trainers):
     trainer_data = [
         {
             # key : value
+            # User
             "id": trainer.id,
             "firstname": trainer.first_name,
             "lastname": trainer.last_name,
             "profession": trainer.profession,
-            "started_date": trainer.started_date.strftime("%b %d, %Y"),
-            "move_title": trainer.move_title,
-            "trainer_category": trainer.category.replace(" & ", "_"),
             "trainer_image_url": trainer.image.url,
+            "facebook": trainer.facebook,
+            "twitter": trainer.twitter,
+            "instagram": trainer.instagram,
+            # Move
+            "move_title": trainer.move_title,
             "move_image_url": trainer.move_image.url,
+            "started_date": trainer.started_date.strftime("%b %d, %Y"),
+            "move_difficulty": trainer.difficulty_level,
+            "move_time_of_day": trainer.time_of_day,
+            "move_yoga_style": trainer.yoga_style,
+            "trainer_category": trainer.category.replace(" & ", "_"),
+            "main_category": trainer.main_category,
             "move_level": trainer.intensity_level,
         }
         for trainer in trainers
