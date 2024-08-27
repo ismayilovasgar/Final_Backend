@@ -23,7 +23,6 @@
   }
 }
 
-/* Mobil Start */
 @media screen and (max-width: 768px) {
   /* ? catalog */
   .catalogTop .catalogNav ul {
@@ -57,9 +56,6 @@
     font-size: 13px;
     line-height: 18px;
   }
-  .catalogHead .catalogTitle {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 650px) {
@@ -84,6 +80,9 @@
   }
   .catalogSorting {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .catalogHead .catalogTitle {
+    display: none;
   }
 }
 
@@ -118,6 +117,12 @@
   }
   .testimonials .testimonialsCol button.readmore {
     width: unset;
+  }
+}
+@media screen and (max-width: 480px) {
+  .catalogHead .catalogSearch {
+    width: 95%;
+    margin: 0 auto;
   }
 }
 @media screen and (max-width: 410px) {

@@ -76,6 +76,25 @@ def filter_by_text(request, text):
     return JsonResponse({"data": data}, safe=False)
 
 
+def filter_by_list(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)  # Parse the JSON body
+            list = data.get("data")
+            result = Trainer.objects.filter(
+                Q(yoga_style__contains=list[0])
+                & Q(time_of_day__iexact=list[1])
+                & Q(difficulty_level__iexact=list[2])
+                & Q(intensity_level__iexact=list[3])
+            )
+            results = filter_select_values(result)
+
+            return JsonResponse({"data": results})
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
 # ! Other def use for format data as json
 def filter_select_values(trainers):
     trainer_data = [

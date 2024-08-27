@@ -82,13 +82,14 @@
 }
 
 .catalogHead .catalogSearch {
-  width: 40%;
   padding: 10px 8px 10px 16px;
   border-radius: 90px;
   border: 2px solid var(--Neutrals-6, #e6e8ec);
   display: flex;
   align-items: center;
   column-gap: 18px;
+  /* flex-grow: 1; */
+  width: 50%;
 }
 .catalogHead .catalogSearch input {
   width: 100%;

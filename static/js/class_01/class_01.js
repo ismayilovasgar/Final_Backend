@@ -156,7 +156,10 @@ linkItems.map((item) => {
 });
 
 button.addEventListener("click", (e) => {
-  fetchPost("name_" + inputText.value.trim(), catalogList);
+  isValidString = inputText.value.trim();
+  if (!!isValidString) {
+    fetchPost("name_" + isValidString, catalogList);
+  }
 });
 
 //? click button by category name
@@ -230,6 +233,29 @@ const fetchPost = async (search_text, wrap) => {
 
   inputText.value = "";
 };
+
+const advancFilterBtn = document.querySelector(".customFilter");
+advancFilterBtn.addEventListener("click", (e) => {
+  // convert 4 input value to array
+  const myarray = [...document.querySelectorAll(".catalogSorting input")].map(
+    (el) => el.value
+  );
+  fetchArrayPost(myarray, catalogList);
+});
+
+async function fetchArrayPost(array, wrap) {
+  // start fetch request
+  const response = await fetch("http://127.0.0.1:8000/trainer/trainer_list/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCookie("csrftoken"), // Include the CSRF token
+    },
+    body: JSON.stringify({ data: array }),
+  });
+  const data = await response.json();
+  console.log(data);
+}
 
 //! Function to get CSRF token from cookies
 function getCookie(name) {
