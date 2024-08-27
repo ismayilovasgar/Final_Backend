@@ -90,16 +90,59 @@ var swiper = new Swiper(".testimonials-swiper", {
 
 //? Fetch Data From Django url
 const catalogList = document.querySelector(".catalogList");
+const catalogSearch = document.querySelector(".catalogSearch");
 const linkItems = [...document.querySelectorAll("ul li.cataloglink")];
 
 // click button by trainer name
 const button = document.querySelector(".catalogSearch button");
 const inputText = document.querySelector(".catalogSearch input");
 
-window.onload = function () {
-  fetchPost("category_Yoga", catalogList);
-  markFirstItem();
-};
+inputText.addEventListener("input", function (event) {
+  let value = inputText.value;
+
+  // Check for multiple consecutive spaces
+  const hasConsecutiveSpaces = /\s{2,}/.test(value);
+  // Check for any numbers
+  const hasNumbers = /[0-9]/.test(value);
+
+  if (hasConsecutiveSpaces || hasNumbers) {
+    // Add error styling
+    catalogSearch.classList.add("error-input");
+  } else {
+    // Remove error styling
+    catalogSearch.classList.remove("error-input");
+  }
+
+  // Optionally, replace invalid input while preserving existing text
+  // This will correct the text but not remove it
+  value = value.replace(/\s{2,}/g, " ").replace(/[0-9]/g, "");
+  inputText.value = value;
+});
+
+// window.onload = function () {
+//   const mediaQuery = window.matchMedia("(min-width: 768px)");
+//   function yourFunction() {
+// fetchPost("category_Yoga", catalogList);
+// markFirstItem();
+//     console.log("+");
+//   }
+
+//   function handleWidthChange(e) {
+//     if (e.matches) {
+// If the screen width is 768px or more, run your function
+//       yourFunction();
+//     } else {
+// Optional: Add logic for when the screen is wider than 768px
+//       console.log("Screen width is under than 768px.");
+//     }
+//   }
+
+// Initial check
+//   handleWidthChange(mediaQuery);
+
+// Add a listener to monitor changes in screen size
+//   mediaQuery.addListener(handleWidthChange);
+// };
 
 linkItems.map((item) => {
   item.addEventListener("click", (e) => {

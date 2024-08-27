@@ -57,13 +57,18 @@ def filter_by_main(request, text):
 
 
 def filter_by_text(request, text):
+    pre_text = text.split("_")[0]
     suf_text = text.split("_")[1]
+    print(suf_text, "+")
     results = []
     if text.split("_")[0].startswith("name"):
+        print("1")
         results = Trainer.objects.filter(
             Q(first_name__startswith=suf_text) | Q(last_name__startswith=suf_text)
         )
+        print(results)
     if text.split("_")[0].startswith("category"):
+        print("2")
         results = Trainer.objects.filter(category=suf_text)
 
     data = filter_select_values(results)
