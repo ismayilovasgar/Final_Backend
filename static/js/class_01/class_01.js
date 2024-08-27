@@ -90,21 +90,46 @@ var swiper = new Swiper(".testimonials-swiper", {
 
 //? Fetch Data From Django url
 const catalogList = document.querySelector(".catalogList");
+const linkItems = [...document.querySelectorAll("ul li.cataloglink")];
+
 // click button by trainer name
 const button = document.querySelector(".catalogSearch button");
 const inputText = document.querySelector(".catalogSearch input");
+
+window.onload = function () {
+  fetchPost("category_Yoga", catalogList);
+  markFirstItem();
+};
+
+linkItems.map((item) => {
+  item.addEventListener("click", (e) => {
+    // remove all selected tag
+    linkItems.forEach((el) => el.classList.remove("selected"));
+    // add selected tag to special item
+    item.classList.toggle("selected");
+
+    fetchPost(`"category_"${item.textContent}`, catalogList);
+  });
+});
 
 button.addEventListener("click", (e) => {
   fetchPost("name_" + inputText.value.trim(), catalogList);
 });
 
-// click button by category name
-const linkItems = document.querySelectorAll("ul li.cataloglink");
+//? click button by category name
 linkItems.forEach((item) => {
   item.addEventListener("click", (e) => {
     fetchPost("category_" + item.textContent, catalogList);
   });
 });
+
+function markFirstItem() {
+  // Select the first item in the list
+  const firstItem = document.querySelector("ul li.cataloglink");
+
+  // Apply a CSS class to mark the first item
+  if (firstItem) firstItem.classList.add("selected");
+}
 
 const fetchPost = async (search_text, wrap) => {
   wrap.innerHTML = "";
@@ -126,7 +151,7 @@ const fetchPost = async (search_text, wrap) => {
         <div class="card">
             <div class="cardPreview">
                 <img src="${item.move_image_url}" alt="">
-                <div class="cardStatus yoga">${item.trainer_category}</div>
+                <div class="cardStatus ${item.trainer_category}">${item.trainer_category}</div>
             </div>
       
             <div class="cardHead">
@@ -141,15 +166,17 @@ const fetchPost = async (search_text, wrap) => {
                         </div>
                     </div>
                 </div>
-                <div class="cardLevel beginner">${item.move_difficulty}</div>
+                <div class="cardLevel ${item.move_difficulty}">${item.move_difficulty}</div>
             </div>
       
             <div class="cardParameters">
                 <div class="cardParameter">
-                    <i class="fa-brands fa-youtube"></i> 7
+                    <i class="fa-brands fa-youtube"></i> 
+                    <span>7</span>
                 </div>
                 <div class="cardParameter">
-                    <i class="fa-regular fa-user"></i> 160
+                    <i class="fa-regular fa-user"></i>
+                    <span>160</span>
                 </div>
             </div>
         </div>

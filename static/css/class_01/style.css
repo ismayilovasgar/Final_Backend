@@ -247,6 +247,11 @@ ul.list.show {
   font-weight: 700;
   line-height: 16px;
 }
+.catalogTop .catalogNav li.cataloglink.selected {
+  border-radius: 100px;
+  background: var(--Neutrals-3, #353945);
+  color: var(--Neutrals-8);
+}
 
 .catalogTop .catalogFilter,
 .catalogTop .advancedFilter {
@@ -335,6 +340,7 @@ ul.list.show {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 32px;
+  min-height: 457px;
 }
 .catalogList .card {
   width: calc(
@@ -401,11 +407,18 @@ ul.list.show {
   height: 24px;
   z-index: 5;
 }
-.catalogList .card .cardPreview .cardStatus.yoga {
+.catalogList .card .cardPreview .cardStatus.Yoga {
   background-color: var(--Primary-4);
 }
-.catalogList .card .cardPreview .cardStatus.fitness {
+.catalogList .card .cardPreview .cardStatus.Fitness {
   background-color: var(--Primary-1);
+}
+
+.catalogList .card .cardPreview .cardStatus.Running {
+  background-color: var(--Primary-3);
+}
+.catalogList .card .cardPreview .cardStatus.Gymnastics {
+  background-color: var(--Primary-2);
 }
 
 .catalogList .card .cardHead {
@@ -414,15 +427,15 @@ ul.list.show {
   border-bottom: 1px solid var(--Neutrals-6);
   display: flex;
   justify-content: space-between;
+  column-gap: 6px;
 }
 .catalogList .card .cardHead .cardUser {
   display: flex;
-  column-gap: 16px;
+  column-gap: 12px;
   align-items: center;
+  justify-content: space-between;
 }
 .catalogList .card .cardHead .cardUser .cardAvatar {
-  width: 40px;
-  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -430,6 +443,7 @@ ul.list.show {
   border-radius: 50%;
   align-self: flex-start;
   overflow: hidden;
+  flex: 0 0 40px;
 }
 .catalogList .card .cardHead .cardUser .cardAvatar img {
   width: 100%;
@@ -462,23 +476,23 @@ ul.list.show {
 .catalogList .card .cardHead .cardLevel {
   align-self: flex-start;
   font-family: "Poppins", sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 700;
   line-height: 12px;
   text-transform: uppercase;
-  padding: 8px;
+  padding: 6px;
   border-radius: 4px;
 }
-.catalogList .card .cardHead .cardLevel.beginner {
+.catalogList .card .cardHead .cardLevel.Beginner {
   border: 2px solid var(--Primary-4);
   color: var(--Primary-4);
 }
-.catalogList .card .cardHead .cardLevel.intermediate {
+.catalogList .card .cardHead .cardLevel.Intermediate {
   border: 2px solid var(--Primary-2);
   color: var(--Primary-2);
 }
-.catalogList .card .cardHead .cardLevel.advanced {
+.catalogList .card .cardHead .cardLevel.Advanced {
   border: 2px solid var(--Primary-1);
   color: var(--Primary-1);
 }
@@ -494,8 +508,14 @@ ul.list.show {
   display: flex;
   column-gap: 8px;
   align-items: center;
+}
+.catalogList .card .cardParameters .cardParameter i {
+  background-color: transparent;
+  color: var(--Neutrals-4);
+}
+.catalogList .card .cardParameters .cardParameter span {
   color: var(--Neutrals-3, #353945);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;

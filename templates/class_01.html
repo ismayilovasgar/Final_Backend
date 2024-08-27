@@ -86,12 +86,8 @@
           <div class="catalogNav">
             <ul>
               {% for key,value in categorys  %}
-                  <li class="cataloglink" data-value="{{value| cut:" " }}">{{value}}</li>
+                  <li class="cataloglink {{value| cut:" " }}">{{value}}</li>
               {% endfor %}
-              {% comment %} <li class="cataloglink active">Yoga</li>
-              <li class="cataloglink">Fitness &amp; Gym</li>
-              <li  class="cataloglink">Mindfulness</li>
-              <li class="cataloglink">Gymnastics</li> {% endcomment %}
             </ul>
           </div>
 
@@ -180,7 +176,7 @@
        {% comment %}?  card html {% endcomment %}       
       <div class="catalogList">
 
-        <div class="card">
+        {% comment %} <div class="card">
             <div class="cardPreview">
                 <img src="{% static 'assets/common/catalog_card/card-pic-1.png' %}" alt="">
                 <div class="cardStatus yoga">yoga</div>
@@ -278,7 +274,7 @@
                 </div>
           </div>
    
-        </div>
+        </div> {% endcomment %}
        
      </div> 
       {% comment %}!  card html {% endcomment %}

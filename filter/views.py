@@ -92,7 +92,7 @@ def filter_select_values(trainers):
             "move_difficulty": trainer.difficulty_level,
             "move_time_of_day": trainer.time_of_day,
             "move_yoga_style": trainer.yoga_style,
-            "trainer_category": trainer.category.replace(" & ", "_"),
+            "trainer_category": trainer.category.replace(" & Gym", ""),
             "main_category": trainer.main_category,
             "move_level": trainer.intensity_level,
         }
