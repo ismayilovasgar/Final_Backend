@@ -254,7 +254,41 @@ async function fetchArrayPost(array, wrap) {
     body: JSON.stringify({ data: array }),
   });
   const data = await response.json();
-  console.log(data);
+
+  data.data.map((item) => {
+    wrap.innerHTML += `
+    <div class="card">
+            <div class="cardPreview">
+                <img class="backPreview" src="${item.move_image_url}" alt="">
+                <div class="cardStatus ${item.main_category}">${item.trainer_category}</div>
+            </div>
+      
+            <div class="cardHead">
+                <div class="cardUser">
+                    <div class="cardAvatar">
+                        <img src="${item.trainer_image_url}" alt="">
+                    </div>
+                    <div class="cardDetails">
+                        <div class="cardTitle">${item.move_title}</div>
+                        <div class="cardTrainer">
+                            <span class="firstName">${item.firstname} ${item.lastname}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardLevel ${item.move_difficulty}">${item.move_difficulty}</div>
+            </div>
+      
+            <div class="cardParameters">
+                <div class="cardParameter">
+                   <i class="fa-brands fa-youtube"></i> 7
+                </div>
+                <div class="cardParameter">
+                   <i class="fa-regular fa-user"></i> 160
+                </div>
+            </div>
+        </div>
+    `;
+  });
 }
 
 //! Function to get CSRF token from cookies
