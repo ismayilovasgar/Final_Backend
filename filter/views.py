@@ -14,7 +14,7 @@ def filter_by_category(request, category):
         try:
             trainer = (
                 Trainer.objects.filter(category=category)
-                .order_by("-created_date")
+                .order_by("created_date")
                 .values()
             )
             trainer_list = list(trainer)
@@ -72,8 +72,8 @@ def filter_by_text(request, text):
 
     if text.split("_")[0].startswith("name"):
         results = Trainer.objects.filter(
-            Q(first_name__startswith=suf_text) | Q(last_name__startswith=suf_text)
-        ).order_by("-created_date")
+            Q(first_name__icontains=suf_text) | Q(last_name__icontains=suf_text)
+        ).order_by("created_date")
 
     if text.split("_")[0].startswith("category"):
         results = Trainer.objects.filter(category=suf_text).order_by("-created_date")

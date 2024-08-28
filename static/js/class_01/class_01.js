@@ -174,8 +174,7 @@ const fetchPostByText = async (search_text, wrap) => {
     }
   );
   const data = await response.json();
-  wrap.innerHTML = "";
-  fillCardToContainer(data, wrap);
+  fillCardToContainer(data, data.data.length, wrap);
   inputText.value = "";
 };
 
@@ -198,8 +197,7 @@ async function fetchPostByArray(array, wrap) {
     body: JSON.stringify({ data: array }),
   });
   const data = await response.json();
-  wrap.innerHTML = "";
-  fillCardToContainer(data, wrap);
+  fillCardToContainer(data, data.data.length, wrap);
 }
 
 //! --------------------------------------------------------------------------------------------------------
@@ -232,9 +230,11 @@ function reverseCard() {
 //! --------------------------------------------------------------------------------------------------------
 //! --------------------------------------------------------------------------------------------------------
 
-function fillCardToContainer(data, wrap = catalogList) {
-  data.data.map((item) => {
-    wrap.innerHTML += `
+async function fillCardToContainer(data, len, wrap = catalogList) {
+  wrap.innerHTML = "";
+  if (len !== 0) {
+    data.data.map((item) => {
+      wrap.innerHTML += `
     <div class="card">
             <div class="cardPreview">
                 <img class="backPreview" src="${item.move_image_url}" alt="">
@@ -268,7 +268,18 @@ function fillCardToContainer(data, wrap = catalogList) {
             </div>
         </div>
     `;
-  });
+    });
+  } else {
+    notFounded();
+  }
+}
+
+function notFounded() {
+  catalogList.innerHTML = "";
+  catalogList.innerHTML = `<div class="notFounded">not founded available content .....</div>`;
+  setTimeout(() => {
+    catalogList.innerHTML = "";
+  }, 750);
 }
 
 function getCookie(name) {

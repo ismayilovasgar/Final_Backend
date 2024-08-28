@@ -347,6 +347,18 @@ ul.list.show {
   gap: 32px;
   min-height: 457px;
 }
+.catalog .catalogList .notFounded {
+  margin: 0 auto;
+  color: var(--section-text);
+  text-align: center;
+  font-family: "SF Pro Display";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: -0.4px;
+}
+
 .catalogList .card {
   width: calc(
     (100% - (var(--catalog_column-gap) * (var(--catalog_column-count) - 1))) /
