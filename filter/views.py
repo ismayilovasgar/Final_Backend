@@ -10,10 +10,13 @@ from django.db.models import Q
 # Create your views here.
 def filter_by_category(request, category):
     print(f"filter text: {category} ")
-
     if request.method == "POST":
         try:
-            trainer = Trainer.objects.filter(category=category).values()
+            trainer = (
+                Trainer.objects.filter(category=category)
+                .order_by("-created_date")
+                .values()
+            )
             trainer_list = list(trainer)
 
             return JsonResponse(trainer_list, safe=False)
@@ -23,13 +26,16 @@ def filter_by_category(request, category):
         return JsonResponse({"error": "Bad request"}, status=400)
 
 
+# ----------------------------------------------------------------------------------------------------------------
+
+
 def filter_by_main_category(request, lifestyle):
-
     print(f"filter text: {lifestyle} ----------------------------------")
-
     if request.method == "POST":
         try:
-            trainers = Trainer.objects.filter(main_category=lifestyle)
+            trainers = Trainer.objects.filter(main_category=lifestyle).order_by(
+                "-created_date"
+            )
             trainer_data = filter_select_values(trainers)
 
             return JsonResponse({"trainer_data": trainer_data})
@@ -38,40 +44,46 @@ def filter_by_main_category(request, lifestyle):
             return print("eerr-------------------------")
     else:
         return JsonResponse({"error": "Bad request"}, status=400)
+
+
+# ----------------------------------------------------------------------------------------------------------------
 
 
 def filter_by_main(request, text):
-
     if request.method == "POST":
         try:
-            trainers = Trainer.objects.filter(category=text)
-
+            trainers = Trainer.objects.filter(category=text).order_by("-created_date")
             trainer_data = filter_select_values(trainers)
 
             return JsonResponse({"trainer_data": trainer_data})
-
         except:
             return print("eerr-------------------------")
     else:
         return JsonResponse({"error": "Bad request"}, status=400)
+
+
+# ----------------------------------------------------------------------------------------------------------------
 
 
 def filter_by_text(request, text):
     suf_text = text.split("_")[1]
     print(suf_text, "+")
     results = []
-    
+
     if text.split("_")[0].startswith("name"):
         results = Trainer.objects.filter(
             Q(first_name__startswith=suf_text) | Q(last_name__startswith=suf_text)
-        )
-        print(results)
+        ).order_by("-created_date")
+
     if text.split("_")[0].startswith("category"):
-        results = Trainer.objects.filter(category=suf_text)
+        results = Trainer.objects.filter(category=suf_text).order_by("-created_date")
 
     data = filter_select_values(results)
 
     return JsonResponse({"data": data}, safe=False)
+
+
+# ----------------------------------------------------------------------------------------------------------------
 
 
 def filter_by_list(request):
@@ -91,6 +103,9 @@ def filter_by_list(request):
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
     return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
+# ----------------------------------------------------------------------------------------------------------------
 
 
 # ! Other def use for format data as json

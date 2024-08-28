@@ -1,11 +1,5 @@
 // Get the modal
 
-// window.onclick = function (event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// };
-
 // ! Swiper - 1
 let swiper_programs = new Swiper(".programs_swiper", {
   grabCursor: true,
@@ -117,17 +111,14 @@ function fetchFilteredData(text, wrap) {
                                 <div class="trainerName">${trainer.firstname} ${trainer.lastname}</div>
                                 <div class="trainerPosition">${trainer.profession}</div>
                                 <div class="trainerSocials">
-                                    <a href="#" target="_blank" class="trainer_social">
-                                        <i class="ri-facebook-circle-line"></i>
+                                    <a href="${trainer.facebook}" target="_blank" class="trainer_social">
+                                        <i class="fa-brands fa-facebook"></i>
                                     </a>
-                                    <a href="#" target="_blank" class="trainer_social">
-                                        <i class="ri-instagram-line"></i>
+                                    <a href="${trainer.instagram}" target="_blank" class="trainer_social">
+                                        <i class="fa-brands fa-instagram"></i>
                                     </a>
-                                    <a href="#" target="_blank" class="trainer_social">
-                                        <i class="ri-twitter-line"></i>
-                                    </a>
-                                    <a href="#" target="_blank" class="trainer_social">
-                                        <i class="ri-linkedin-box-line"></i>
+                                    <a href="${trainer.twitter}" target="_blank" class="trainer_social">
+                                        <i class="fa-brands fa-twitter"></i>
                                     </a>
                                 </div>
                             </div>
@@ -153,12 +144,13 @@ function fetchFilteredData(text, wrap) {
                                             </div>
                                             <div class="trainerParameters">
                                                 <div class="trainerParameter">
-                                                   <i class="fa-brands fa-youtube"></i> 7
+                                                   <i class="fa-brands fa-youtube"></i>
+                                                   <span>7</span>  
                                                 </div>
                                                 <div class="trainerParameter">
-                                                   <i class="fa-regular fa-user"></i> 160
+                                                  <i class="fa-regular fa-user"></i> 
+                                                  <span>160</span> 
                                                 </div>
-
                                             </div>
                                         </div>
                                     </a>
@@ -182,22 +174,33 @@ function fetchFilteredData(text, wrap) {
             </div>
         `;
       });
-      const modal = document.querySelectorAll(".modal");
+
       const trainers = [...document.querySelectorAll(".listWrap .trainerItem")];
       const closeBtns = [...document.querySelectorAll(".modal .modalCloseBtn")];
 
       trainers.forEach((trainer) => {
         trainer.addEventListener("click", (e) => {
-          trainer.nextElementSibling.style.display = "block";
+          // trainer.nextElementSibling.style.display = "block";
+          trainer.nextElementSibling.classList.add("showed");
           e.preventDefault();
         });
       });
 
       closeBtns.forEach((closeBtn) => {
         closeBtn.addEventListener("click", (e) => {
-          closeBtn.closest(".modal").style.display = "none";
+          // closeBtn.closest(".modal").style.display = "none";
+          closeBtn.closest(".modal").classList.remove("showed");
         });
       });
+      window.onclick = function (event) {
+        const modal = document.querySelector(".modal.showed");
+
+        if (event.target == modal) {
+          modal.classList.remove("showed");
+        }
+      };
+
+      //
     })
     .catch((error) => console.error("Error fetching data:", error));
 }

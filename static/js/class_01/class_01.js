@@ -1,4 +1,4 @@
-//* nice-select
+//? nice-select
 const select = document.querySelector(".nice-select");
 const spanText = document.querySelector(".nice-select input.current");
 const arrows = document.querySelectorAll(".nice-select .select_arrow i");
@@ -46,7 +46,8 @@ select_sorting.forEach((item) => {
 });
 //! --------------------------------------------------------------------------------------------------------
 //! --------------------------------------------------------------------------------------------------------
-// Form
+
+//? Form
 const catalogInput = document.getElementById("catalog_input");
 const form = document.getElementById("catalog_search");
 
@@ -94,6 +95,7 @@ var swiper = new Swiper(".testimonials-swiper", {
 });
 //! --------------------------------------------------------------------------------------------------------
 //! --------------------------------------------------------------------------------------------------------
+
 //? Fetch Data From Django url
 const catalogList = document.querySelector(".catalogList");
 const catalogSearch = document.querySelector(".catalogSearch");
@@ -172,7 +174,6 @@ const fetchPostByText = async (search_text, wrap) => {
     }
   );
   const data = await response.json();
-
   wrap.innerHTML = "";
   fillCardToContainer(data, wrap);
   inputText.value = "";
@@ -237,7 +238,7 @@ function fillCardToContainer(data, wrap = catalogList) {
     <div class="card">
             <div class="cardPreview">
                 <img class="backPreview" src="${item.move_image_url}" alt="">
-                <div class="cardStatus ${item.main_category}">${item.trainer_category}</div>
+                <div class="cardStatus ${item.trainer_category}">${item.trainer_category}</div>
             </div>
       
             <div class="cardHead">
