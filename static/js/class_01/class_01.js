@@ -125,31 +125,6 @@ inputText.addEventListener("input", function (event) {
   inputText.value = value;
 });
 
-// window.onload = function () {
-//   const mediaQuery = window.matchMedia("(min-width: 768px)");
-//   function yourFunction() {
-// fetchPost("category_Yoga", catalogList);
-// markFirstItem();
-//     console.log("+");
-//   }
-
-//   function handleWidthChange(e) {
-//     if (e.matches) {
-// If the screen width is 768px or more, run your function
-//       yourFunction();
-//     } else {
-// Optional: Add logic for when the screen is wider than 768px
-//       console.log("Screen width is under than 768px.");
-//     }
-//   }
-
-// Initial check
-//   handleWidthChange(mediaQuery);
-
-// Add a listener to monitor changes in screen size
-//   mediaQuery.addListener(handleWidthChange);
-// };
-
 linkItems.map((item) => {
   item.addEventListener("click", (e) => {
     // remove all selected tag
@@ -157,21 +132,21 @@ linkItems.map((item) => {
     // add selected tag to special item
     item.classList.toggle("selected");
 
-    fetchPost(`"category_"${item.textContent}`, catalogList);
+    fetchPostByText(`"category_"${item.textContent}`, catalogList);
   });
 });
 
 button.addEventListener("click", (e) => {
   isValidString = inputText.value.trim();
   if (!!isValidString) {
-    fetchPost("name_" + isValidString, catalogList);
+    fetchPostByText("name_" + isValidString, catalogList);
   }
 });
 
 //? click button by category name
 linkItems.forEach((item) => {
   item.addEventListener("click", (e) => {
-    fetchPost("category_" + item.textContent, catalogList);
+    fetchPostByText("category_" + item.textContent, catalogList);
   });
 });
 
@@ -183,7 +158,7 @@ function markFirstItem() {
   if (firstItem) firstItem.classList.add("selected");
 }
 
-const fetchPost = async (search_text, wrap) => {
+const fetchPostByText = async (search_text, wrap) => {
   wrap.innerHTML = "";
   const response = await fetch(
     `http://127.0.0.1:8000/trainer/trainer_text/${search_text}/`,
@@ -209,10 +184,10 @@ advancFilterBtn.addEventListener("click", (e) => {
   const myarray = [...document.querySelectorAll(".catalogSorting input")].map(
     (el) => el.value
   );
-  fetchArrayPost(myarray, catalogList);
+  fetchPostByArray(myarray, catalogList);
 });
 
-async function fetchArrayPost(array, wrap) {
+async function fetchPostByArray(array, wrap) {
   const response = await fetch("http://127.0.0.1:8000/trainer/trainer_list/", {
     method: "POST",
     headers: {
