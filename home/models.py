@@ -92,7 +92,7 @@ class Trainer(models.Model):
     move_image = models.ImageField(
         upload_to=get_image_upload_path, default="move_avatar.jpg"
     )
-    started_date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     # Add the difficulty level field to the model
     difficulty_level = models.CharField(
@@ -144,6 +144,9 @@ class Trainer(models.Model):
 
     def __str__(self) -> str:
         return f"{self.first_name} | {self.last_name}"
+
+    class Meta:
+        ordering = ["-created_date"]
 
 
 def get_review_upload_path(instance, filename):

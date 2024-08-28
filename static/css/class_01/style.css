@@ -517,10 +517,10 @@ ul.list.show {
 }
 .catalogList .card .cardParameters .cardParameter i {
   background-color: transparent;
-  color: var(--Neutrals-4);
+  color: var(--section-text);
 }
 .catalogList .card .cardParameters .cardParameter span {
-  color: var(--Neutrals-3, #353945);
+  color: var(--section-text);
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-style: normal;

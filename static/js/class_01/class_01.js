@@ -19,6 +19,8 @@ select.addEventListener("click", (e) => {
     });
   });
 });
+//! --------------------------------------------------------------------------------------------------------
+//! --------------------------------------------------------------------------------------------------------
 
 //? sorting-select
 const select_sorting = document.querySelectorAll(".sorting");
@@ -36,11 +38,14 @@ select_sorting.forEach((item) => {
       list_item.addEventListener("click", (e) => {
         item.querySelector("input.current").value = list_item.textContent;
       });
+      //
     });
-    e.preventDefault();
+    //
   });
+  //
 });
-
+//! --------------------------------------------------------------------------------------------------------
+//! --------------------------------------------------------------------------------------------------------
 // Form
 const catalogInput = document.getElementById("catalog_input");
 const form = document.getElementById("catalog_search");
@@ -87,7 +92,8 @@ var swiper = new Swiper(".testimonials-swiper", {
     },
   },
 });
-
+//! --------------------------------------------------------------------------------------------------------
+//! --------------------------------------------------------------------------------------------------------
 //? Fetch Data From Django url
 const catalogList = document.querySelector(".catalogList");
 const catalogSearch = document.querySelector(".catalogSearch");
@@ -189,48 +195,11 @@ const fetchPost = async (search_text, wrap) => {
       },
       body: JSON.stringify("search_text"),
     }
-  )
-    .then((res) => res.json())
-    .then((resp) => {
-      resp.data.map((item) => {
-        wrap.innerHTML += `
-        <div class="card">
-            <div class="cardPreview">
-                <img src="${item.move_image_url}" alt="">
-                <div class="cardStatus ${item.trainer_category}">${item.trainer_category}</div>
-            </div>
-      
-            <div class="cardHead">
-                <div class="cardUser">
-                    <div class="cardAvatar">
-                        <img src="${item.trainer_image_url}" alt="">
-                    </div>
-                    <div class="cardDetails">
-                        <div class="cardTitle">${item.move_title}</div>
-                        <div class="cardTrainer">
-                            <span class="firstName">${item.firstname} ${item.lastname} </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="cardLevel ${item.move_difficulty}">${item.move_difficulty}</div>
-            </div>
-      
-            <div class="cardParameters">
-                <div class="cardParameter">
-                    <i class="fa-brands fa-youtube"></i> 
-                    <span>7</span>
-                </div>
-                <div class="cardParameter">
-                    <i class="fa-regular fa-user"></i>
-                    <span>160</span>
-                </div>
-            </div>
-        </div>
-        `;
-      });
-    })
-    .catch((error) => console.error("Error fetching data:", error));
+  );
+  const data = await response.json();
 
+  wrap.innerHTML = "";
+  fillCardToContainer(data, wrap);
   inputText.value = "";
 };
 
@@ -244,7 +213,6 @@ advancFilterBtn.addEventListener("click", (e) => {
 });
 
 async function fetchArrayPost(array, wrap) {
-  // start fetch request
   const response = await fetch("http://127.0.0.1:8000/trainer/trainer_list/", {
     method: "POST",
     headers: {
@@ -254,7 +222,41 @@ async function fetchArrayPost(array, wrap) {
     body: JSON.stringify({ data: array }),
   });
   const data = await response.json();
+  wrap.innerHTML = "";
+  fillCardToContainer(data, wrap);
+}
 
+//! --------------------------------------------------------------------------------------------------------
+//! --------------------------------------------------------------------------------------------------------
+const oldestBtn = document.querySelector("[data-value='Oldest']");
+const newestBtn = document.querySelector("[data-value='Newest']");
+let oldest_status = true;
+let newest_status = false;
+oldestBtn.addEventListener("click", (e) => {
+  newest_status = true;
+  if (oldest_status) reverseCard();
+  oldest_status = false;
+});
+
+newestBtn.addEventListener("click", (e) => {
+  oldest_status = true;
+  if (newest_status) reverseCard();
+  newest_status = false;
+});
+
+function reverseCard() {
+  console.log("+");
+  let cards = [...catalogList.querySelectorAll(".card")].reverse();
+  catalogList.innerHTML = "";
+  cards.map((item) => {
+    catalogList.append(item);
+  });
+}
+
+//! --------------------------------------------------------------------------------------------------------
+//! --------------------------------------------------------------------------------------------------------
+
+function fillCardToContainer(data, wrap = catalogList) {
   data.data.map((item) => {
     wrap.innerHTML += `
     <div class="card">
@@ -280,10 +282,12 @@ async function fetchArrayPost(array, wrap) {
       
             <div class="cardParameters">
                 <div class="cardParameter">
-                   <i class="fa-brands fa-youtube"></i> 7
+                   <i class="fa-brands fa-youtube"></i>
+                   <span>7</span> 
                 </div>
                 <div class="cardParameter">
-                   <i class="fa-regular fa-user"></i> 160
+                   <i class="fa-regular fa-user"></i>
+                  <span>160</span>
                 </div>
             </div>
         </div>
@@ -291,7 +295,6 @@ async function fetchArrayPost(array, wrap) {
   });
 }
 
-//! Function to get CSRF token from cookies
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {

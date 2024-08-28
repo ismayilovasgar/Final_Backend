@@ -51,6 +51,7 @@ def class01__page(request):
     trainers = Trainer.objects.all()
     context = {
         "trainers": trainers,
+        "categorys": Trainer.CATEGORY_CHOICES,
         "styles": Trainer.YOGA_STYLE_CHOICES,
         "timeofday": Trainer.TIME_OF_DAY_CHOICES,
         "difficulty": Trainer.DIFFICULTY_CHOICES,

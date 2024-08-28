@@ -6,6 +6,8 @@ from .models import *
 @admin.register(Trainer)
 class TrainerAdmin(admin.ModelAdmin):
 
+    list_display = ["first_name", "last_name", "category", "created_date"]
+
     class Meta:
         model = Trainer
 

@@ -57,18 +57,16 @@ def filter_by_main(request, text):
 
 
 def filter_by_text(request, text):
-    pre_text = text.split("_")[0]
     suf_text = text.split("_")[1]
     print(suf_text, "+")
     results = []
+    
     if text.split("_")[0].startswith("name"):
-        print("1")
         results = Trainer.objects.filter(
             Q(first_name__startswith=suf_text) | Q(last_name__startswith=suf_text)
         )
         print(results)
     if text.split("_")[0].startswith("category"):
-        print("2")
         results = Trainer.objects.filter(category=suf_text)
 
     data = filter_select_values(results)
@@ -79,14 +77,14 @@ def filter_by_text(request, text):
 def filter_by_list(request):
     if request.method == "POST":
         try:
-            data = json.loads(request.body)  # Parse the JSON body
+            data = json.loads(request.body)
             list = data.get("data")
             result = Trainer.objects.filter(
                 Q(yoga_style__contains=list[0])
                 & Q(time_of_day__iexact=list[1])
                 & Q(difficulty_level__iexact=list[2])
                 & Q(intensity_level__iexact=list[3])
-            )
+            ).order_by("-created_date")
             results = filter_select_values(result)
 
             return JsonResponse({"data": results})
@@ -112,7 +110,7 @@ def filter_select_values(trainers):
             # Move
             "move_title": trainer.move_title,
             "move_image_url": trainer.move_image.url,
-            "started_date": trainer.started_date.strftime("%b %d, %Y"),
+            "started_date": trainer.created_date.strftime("%b %d, %Y"),
             "move_difficulty": trainer.difficulty_level,
             "move_time_of_day": trainer.time_of_day,
             "move_yoga_style": trainer.yoga_style,
