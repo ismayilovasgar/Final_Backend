@@ -62,7 +62,28 @@
                                     <a href="{% url "download" %}" class="headerLink">Download</a>
                                 </li>
                                 <li class="drop">
-                                    <a href="{% url "class02" %}" class="headerLink dropdownMenu">Class</a>
+                                    <div class="headerLink dropdownMenu">
+                                        <span >Class</span>
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <ul class="classDropdownMenu">
+                                        <li>
+                                            <a href="{% url "class01" %}" class="class_link">
+                                                <div class="link_icon">
+                                                    <i class="fa-brands fa-youtube"></i>
+                                                </div>
+                                                <span class="link_text">Program Videos</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url "class02" %}" class="class_link">
+                                                <div class="link_icon">
+                                                    <i class="fa-solid fa-bolt"></i>
+                                                </div>
+                                                <span class="link_text">Premium Classes</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="{% url "lifestyle" %}" class="headerLink">Lifestyle</a>
@@ -88,7 +109,6 @@
                         <div class="buttonGroups">
                             <button class="headerTrialBtn">Get free trial</button>
                             <button class="hidden"><i class="fa-solid fa-bars"></i></button>
-                            <!-- <button class="close hidden"><i class="fa-solid fa-xmark"></i></button> -->
                         </div>
                     </div>
 
@@ -101,13 +121,13 @@
                     <div class="wrap">
                         <ul class="menuLinks">
                             <li class="menuLink">
-                                <a href="#">Features</a>
+                                <a href="{% url "features" %}">Features</a>
                             </li>
                             <li class="menuLink">
-                                <a href="#">Pricing</a>
+                                <a href="{% url "pricing" %}">Pricing</a>
                             </li>
                             <li class="menuLink">
-                                <a href="#">Download</a>
+                                <a href="{% url "download" %}">Download</a>
                             </li>
                             <li class="dropdownLink">
                                 <a href="#">Class</a>
@@ -131,16 +151,20 @@
                                 <li>
                                     <div class="socials">
                                         <a href="#">
-                                            <img src="{% static '/assets/images/tabletMode/facebook.svg' %}" alt="">
+                                            {% comment %} <img src="{% static '/assets/images/tabletMode/facebook.svg' %}" alt=""> {% endcomment %}
+                                            <i class="fa-brands fa-facebook"></i>
                                         </a>
                                         <a href="#">
-                                            <img src="{% static '/assets/images/tabletMode/instgram.svg' %}" alt="">
+                                            {% comment %} <img src="{% static '/assets/images/tabletMode/instgram.svg' %}" alt=""> {% endcomment %}
+                                            <i class="fa-brands fa-instagram"></i>
                                         </a>
                                         <a href="#">
-                                            <img src="{% static '/assets/images/tabletMode/ball.svg' %}" alt="">
+                                            {% comment %} <img src="{% static '/assets/images/tabletMode/ball.svg' %}" alt=""> {% endcomment %}
+                                            <i class="fa-solid fa-basketball"></i>
                                         </a>
                                         <a href="#">
-                                            <img src="{% static '/assets/images/tabletMode/behance.svg' %}" alt="">
+                                            {% comment %} <img src="{% static '/assets/images/tabletMode/behance.svg' %}" alt=""> {% endcomment %}
+                                            <i class="fa-brands fa-behance"></i>
                                         </a>
                                     </div>
                                 </li>

@@ -60,8 +60,10 @@ def class01__page(request):
     return render(request, "class_01.html", context)
 
 
-def class01detail__page(request):
-    return render(request, "class_01_detail.html")
+def class01detail__page(request, id):
+    trainer = Trainer.objects.get(id=id)
+    context = {"trainer": trainer}
+    return render(request, "class_01_detail.html", context)
 
 
 def class02__page(request):

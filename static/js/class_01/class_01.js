@@ -235,7 +235,8 @@ async function fillCardToContainer(data, len, wrap = catalogList) {
   if (len !== 0) {
     data.data.map((item) => {
       wrap.innerHTML += `
-    <div class="card">
+    <a class="card" href="/class_01_detail/${item.id}/">
+    <div class="">
             <div class="cardPreview">
                 <img class="backPreview" src="${item.move_image_url}" alt="">
                 <div class="cardStatus ${item.trainer_category}">${item.trainer_category}</div>
@@ -266,11 +267,12 @@ async function fillCardToContainer(data, len, wrap = catalogList) {
                   <span>160</span>
                 </div>
             </div>
-        </div>
+      </div>
+      </a>
     `;
     });
   } else {
-    notFounded();
+    // notFounded();
   }
 }
 

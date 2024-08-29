@@ -31,7 +31,7 @@ urlpatterns = [
     path("lifestyle/", lifestyle__page,name="lifestyle"),                   # http://127.0.0.1:8000/lifestyle
     path("singleblog/<int:id>/", singleblog__page,name="singleblog"),                # http://127.0.0.1:8000/singleblog
     path("class_01/", class01__page,name="class01"),                        # http://127.0.0.1:8000/class_01
-    path("class_01_detail/", class01detail__page,name="class02detail"),     # http://127.0.0.1:8000/class_01_detail
+    path("class_01_detail/<int:id>/", class01detail__page,name="class01detail"),     # http://127.0.0.1:8000/class_01_detail
     path("class_02/", class02__page,name="class02"),                        # http://127.0.0.1:8000/class_02
     path("class_02_detail/", class02detail__page,name="class02detail"),     # http://127.0.0.1:8000/class_02_detail
     path("trainer/", include("filter.urls")),                                 # http://127.0.0.1:8000/trainer/...
