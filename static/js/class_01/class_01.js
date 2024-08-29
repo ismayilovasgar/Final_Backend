@@ -174,6 +174,7 @@ const fetchPostByText = async (search_text, wrap) => {
     }
   );
   const data = await response.json();
+
   fillCardToContainer(data, data.data.length, wrap);
   inputText.value = "";
 };
@@ -197,6 +198,7 @@ async function fetchPostByArray(array, wrap) {
     body: JSON.stringify({ data: array }),
   });
   const data = await response.json();
+
   fillCardToContainer(data, data.data.length, wrap);
 }
 
@@ -219,7 +221,6 @@ newestBtn.addEventListener("click", (e) => {
 });
 
 function reverseCard() {
-  console.log("+");
   let cards = [...catalogList.querySelectorAll(".card")].reverse();
   catalogList.innerHTML = "";
   cards.map((item) => {
@@ -231,6 +232,8 @@ function reverseCard() {
 //! --------------------------------------------------------------------------------------------------------
 
 async function fillCardToContainer(data, len, wrap = catalogList) {
+  oldest_status = true;
+  newest_status = false;
   wrap.innerHTML = "";
   if (len !== 0) {
     data.data.map((item) => {
