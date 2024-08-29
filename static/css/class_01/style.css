@@ -145,10 +145,15 @@
   line-height: 48px;
   border: 2px solid var(--Neutrals-6, #e6e8ec);
 }
+.sorting:hover > *,
+.nice-select:hover > * {
+  cursor: pointer;
+}
 .nice-select {
   column-gap: 18px;
   width: 180px;
 }
+
 .sorting {
   width: 100%;
   display: flex;
@@ -175,13 +180,7 @@
   color: var(--Neutrals-4);
   padding: 4px;
 }
-.focus {
-  border-color: var(--Neutrals-4) !important;
-  /* box-shadow: inset 0 0 0 2px #4b6baa; */
-}
-.error-input {
-  border-color: red !important;
-}
+
 .select .select_arrow i {
   display: flex;
   align-items: center;
@@ -215,6 +214,13 @@
   z-index: 100;
   overflow: hidden;
 }
+.focus {
+  border-color: var(--Neutrals-4) !important;
+  /* box-shadow: inset 0 0 0 2px #4b6baa; */
+}
+.error-input {
+  border-color: red !important;
+}
 ul.list li {
   width: 100%;
   color: var(--Neutrals-2, #edeeee);
@@ -243,6 +249,7 @@ ul.list.show {
   align-items: center;
   justify-content: center;
 }
+
 .catalogTop .catalogNav li.cataloglink {
   padding: 6px 12px;
   color: var(--Neutrals-4, #777e90);
@@ -251,6 +258,10 @@ ul.list.show {
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
+}
+
+.catalogTop .catalogNav li.cataloglink:hover {
+  cursor: pointer;
 }
 .catalogTop .catalogNav li.cataloglink.selected {
   border-radius: 100px;
